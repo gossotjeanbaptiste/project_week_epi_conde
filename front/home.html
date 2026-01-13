@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Accueil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <h1 class="logo">thuun</h1>
+                <button class="logout-btn" onclick="handleLogout()">Déconnexion</button>
+            </div>
+            <p class="tagline">Votre banque digitale</p>
+            <p id="user-name" class="user-name"></p>
+        </header>
+
+        <main class="main-content">
+            <div class="welcome-section">
+                <h2>Bienvenue sur Thuun</h2>
+                <p>Sélectionnez une section pour continuer</p>
+            </div>
+
+            <div class="buttons-container">
+                <button class="nav-button courses-btn" onclick="navigateTo('courses')">
+                    <span class="icon">📚</span>
+                    <span class="text">Cours</span>
+                </button>
+
+                <button class="nav-button account-btn" onclick="navigateTo('account')">
+                    <span class="icon">👤</span>
+                    <span class="text">Compte</span>
+                </button>
+
+                <button class="nav-button advisor-btn" onclick="navigateTo('advisor')">
+                    <span class="icon">💼</span>
+                    <span class="text">Conseiller</span>
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Thuun. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

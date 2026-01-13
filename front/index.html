@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Connexion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container login-container">
+        <header class="header">
+            <h1 class="logo">thuun</h1>
+            <p class="tagline">Votre banque digitale</p>
+        </header>
+
+        <main class="main-content">
+            <div class="login-section">
+                <h2>Connexion</h2>
+                <p>Accédez à votre compte bancaire</p>
+
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="login-btn">Se connecter</button>
+                </form>
+
+                <div id="error-message" class="error-message"></div>
+
+                <div class="login-options">
+                    <a href="#">Mot de passe oublié ?</a>
+                    <span>•</span>
+                    <a href="#">Créer un compte</a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Thuun. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Mon Compte</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            min-height: 100vh;
+        }
+
+        .account-page {
+            padding: 20px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h2 {
+            font-size: 32px;
+            color: #0a2463;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(36, 123, 160, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 8px 20px rgba(36, 123, 160, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 12px 30px rgba(36, 123, 160, 0.4);
+            }
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h3 {
+            font-size: 28px;
+            color: #0a2463;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+        }
+
+        .profile-info p {
+            color: #666;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #247ba0;
+            transition: all 0.3s ease;
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .info-item:nth-child(1) { animation-delay: 0.1s; }
+        .info-item:nth-child(2) { animation-delay: 0.2s; }
+        .info-item:nth-child(3) { animation-delay: 0.3s; }
+        .info-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            color: #0a2463;
+            font-weight: 600;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.2s; }
+        .stat-card:nth-child(2) { animation-delay: 0.3s; }
+        .stat-card:nth-child(3) { animation-delay: 0.4s; }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0a2463;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Back Button */
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: #0a2463;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            color: #247ba0;
+            transform: translateX(-5px);
+        }
+
+        /* Action Buttons */
+        .actions-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .actions-card h3 {
+            font-size: 20px;
+            color: #0a2463;
+            margin: 0 0 20px 0;
+            font-weight: 700;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            color: #0a2463;
+        }
+
+        .action-btn:hover {
+            border-color: #247ba0;
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(36, 123, 160, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <h1 class="logo">thuun</h1>
+                <button class="logout-btn" onclick="handleLogout()">Déconnexion</button>
+            </div>
+            <p class="tagline">Votre banque digitale</p>
+        </header>
+
+        <main class="main-content account-page">
+            <button class="back-to-home" onclick="goBack()">← Retour à l'accueil</button>
+
+            <div class="page-header">
+                <h2>👤 Mon Compte</h2>
+                <p>Gérez vos informations personnelles</p>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="avatar" id="userAvatar">
+                        <!-- Initiales générées par JS -->
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="userName">Chargement...</h3>
+                        <p id="userEmail">email@example.com</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span>👤</span> Prénom
+                        </div>
+                        <div class="info-value" id="userFirstName">-</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span>👤</span> Nom
+                        </div>
+                        <div class="info-value" id="userLastName">-</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span>📧</span> Email
+                        </div>
+                        <div class="info-value" id="userEmailInfo">-</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span>🆔</span> ID Client
+                        </div>
+                        <div class="info-value" id="userId">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-value" id="coursesViewed">0</div>
+                    <div class="stat-label">Cours consultés</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value" id="quizCompleted">0</div>
+                    <div class="stat-label">Quiz complétés</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value" id="memberSince">2026</div>
+                    <div class="stat-label">Membre depuis</div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions-card">
+                <h3>⚙️ Actions rapides</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="editProfile()">
+                        ✏️ Modifier mon profil
+                    </button>
+                    <button class="action-btn" onclick="changePassword()">
+                        🔒 Changer mon mot de passe
+                    </button>
+                    <button class="action-btn" onclick="viewHistory()">
+                        📊 Voir mon historique
+                    </button>
+                    <button class="action-btn" onclick="downloadData()">
+                        💾 Télécharger mes données
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Thuun. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Charger les informations utilisateur
+        document.addEventListener('DOMContentLoaded', loadUserInfo);
+
+        function loadUserInfo() {
+            const user = JSON.parse(localStorage.getItem('thuun_user') || '{}');
+
+            if (!user.email) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Afficher les informations
+            document.getElementById('userName').textContent = `${user.prenom || ''} ${user.nom || ''}`.trim() || 'Utilisateur';
+            document.getElementById('userEmail').textContent = user.email;
+            document.getElementById('userFirstName').textContent = user.prenom || 'Non renseigné';
+            document.getElementById('userLastName').textContent = user.nom || 'Non renseigné';
+            document.getElementById('userEmailInfo').textContent = user.email;
+            document.getElementById('userId').textContent = `#${user.id || '0000'}`;
+
+            // Générer les initiales pour l'avatar
+            const initials = getInitials(user.prenom, user.nom);
+            document.getElementById('userAvatar').textContent = initials;
+
+            // Stats fictives (à remplacer par de vraies données depuis le backend)
+            document.getElementById('coursesViewed').textContent = Math.floor(Math.random() * 20) + 5;
+            document.getElementById('quizCompleted').textContent = Math.floor(Math.random() * 15) + 3;
+            document.getElementById('memberSince').textContent = '2026';
+        }
+
+        function getInitials(prenom, nom) {
+            const p = prenom || '';
+            const n = nom || '';
+            
+            if (p && n) {
+                return (p.charAt(0) + n.charAt(0)).toUpperCase();
+            } else if (p) {
+                return p.charAt(0).toUpperCase();
+            } else if (n) {
+                return n.charAt(0).toUpperCase();
+            }
+            return '?';
+        }
+
+        function goBack() {
+            playClickSound();
+            window.location.href = 'home.html';
+        }
+
+        function editProfile() {
+            playClickSound();
+            alert('🚧 Fonctionnalité en développement\nBientôt disponible !');
+        }
+
+        function changePassword() {
+            playClickSound();
+            alert('🚧 Fonctionnalité en développement\nBientôt disponible !');
+        }
+
+        function viewHistory() {
+            playClickSound();
+            alert('🚧 Fonctionnalité en développement\nBientôt disponible !');
+        }
+
+        function downloadData() {
+            playClickSound();
+            const user = JSON.parse(localStorage.getItem('thuun_user') || '{}');
+            const dataStr = JSON.stringify(user, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'mes-donnees-thuun.json';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

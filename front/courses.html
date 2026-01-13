@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Nos Cours</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Override du body pour la page courses */
+        body {
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 0;
+        }
+
+        /* Courses Page Styles */
+        .courses-page {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .courses-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .courses-header h2 {
+            font-size: 36px;
+            color: #0a2463;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .courses-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* Age Category Selector */
+        .age-categories {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-btn {
+            padding: 12px 28px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .category-btn:hover {
+            border-color: #247ba0;
+            color: #247ba0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(36, 123, 160, 0.2);
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            color: white;
+            border-color: #247ba0;
+            box-shadow: 0 6px 20px rgba(36, 123, 160, 0.3);
+        }
+
+        /* Category Section */
+        .category-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .category-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-title {
+            font-size: 26px;
+            color: #0a2463;
+            margin-bottom: 25px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Sub-categories within age groups */
+        .subcategory-section {
+            margin-bottom: 50px;
+        }
+
+        .subcategory-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #247ba0;
+        }
+
+        .subcategory-header h4 {
+            margin: 0;
+            font-size: 20px;
+            color: #0a2463;
+            font-weight: 700;
+        }
+
+        .subcategory-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            color: white;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border-top: 4px solid #247ba0;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            border-top-color: #0a2463;
+        }
+
+        .course-card-header {
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            color: white;
+            padding: 20px;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .course-card-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+
+        .course-meta span {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .course-card-body {
+            padding: 20px;
+            background: white;
+        }
+
+        .course-description {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .course-card-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafafa;
+            gap: 10px;
+        }
+
+        .course-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .instructor {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .duration {
+            font-size: 13px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .course-btn {
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(10, 36, 99, 0.2);
+            white-space: nowrap;
+        }
+
+        .course-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(10, 36, 99, 0.3);
+        }
+
+        .course-btn-video::before {
+            content: "▶ ";
+            margin-right: 4px;
+        }
+
+        .course-btn-quiz {
+            background: linear-gradient(135deg, #00c896 0%, #00a876 100%);
+        }
+
+        .course-btn-quiz::before {
+            content: "📝 ";
+            margin-right: 4px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+            margin: 40px auto;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .video-container {
+            background: #000;
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-details {
+            padding: 30px;
+            background: white;
+        }
+
+        .detail-row {
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #999;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .detail-value {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .level-beginner {
+            background: #00c896;
+        }
+
+        .level-intermediate {
+            background: #ffa500;
+        }
+
+        .level-advanced {
+            background: #ff6b6b;
+        }
+
+        /* Quiz Panel Styles */
+        .quiz-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 90%;
+            max-width: 600px;
+            height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .quiz-panel.active {
+            right: 0;
+        }
+
+        .quiz-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1999;
+        }
+
+        .quiz-overlay.active {
+            display: block;
+        }
+
+        .quiz-header {
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            color: white;
+            padding: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-header h2 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+        }
+
+        .quiz-header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .quiz-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quiz-close:hover {
+            background: white;
+            color: #0a2463;
+            transform: rotate(90deg);
+        }
+
+        .quiz-content {
+            padding: 30px 25px;
+        }
+
+        .quiz-instruction {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .quiz-instruction h3 {
+            margin: 0 0 10px 0;
+            color: #0a2463;
+            font-size: 18px;
+        }
+
+        .quiz-instruction p {
+            margin: 0;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Post-it Notes */
+        .postits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .postit {
+            perspective: 1000px;
+            cursor: pointer;
+            height: 200px;
+        }
+
+        .postit-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .postit.flipped .postit-inner {
+            transform: rotateY(180deg);
+        }
+
+        .postit-front,
+        .postit-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .postit-front {
+            background: #ffeb3b;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .postit-back {
+            background: #4caf50;
+            color: white;
+            transform: rotateY(180deg);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .postit:hover .postit-inner {
+            transform: scale(1.05);
+        }
+
+        .postit.flipped:hover .postit-inner {
+            transform: rotateY(180deg) scale(1.05);
+        }
+
+        /* Back Button */
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: #0a2463;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            color: #247ba0;
+            transform: translateX(-5px);
+        }
+
+        /* Loading & Error States */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            font-size: 16px;
+        }
+
+        .no-courses {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+            }
+
+            .courses-page {
+                gap: 20px;
+            }
+
+            .courses-header h2 {
+                font-size: 28px;
+            }
+
+            .age-categories {
+                flex-direction: column;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .course-card-footer {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .course-btn {
+                width: 100%;
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20px auto;
+                border-radius: 12px;
+            }
+
+            .modal-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .close-btn {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <h1 class="logo">thuun</h1>
+                <button class="logout-btn" onclick="handleLogout()">Déconnexion</button>
+            </div>
+            <p class="tagline">Votre banque digitale</p>
+        </header>
+
+        <main class="main-content courses-page">
+            <button class="back-to-home" onclick="goBack()">← Retour à l'accueil</button>
+
+            <div class="courses-header">
+                <h2>📚 Nos Cours de Finance</h2>
+                <p>Apprends les bases de la banque et de la gestion financière à ton rythme</p>
+            </div>
+
+            <!-- Category Selector -->
+            <div class="age-categories">
+                <button class="category-btn active" onclick="selectCategory('12-14')">🎮 12-14 ans</button>
+                <button class="category-btn" onclick="selectCategory('15-18')">🎓 15-18 ans</button>
+                <button class="category-btn" onclick="selectCategory('18-25')">💼 18-25 ans</button>
+            </div>
+
+            <!-- Courses for 12-14 years old -->
+            <div id="category-12-14" class="category-section active">
+                <h3 class="category-title">🎮 Cours pour les 12-14 ans</h3>
+                <div id="subcategories-12-14"></div>
+            </div>
+
+            <!-- Courses for 15-18 years old -->
+            <div id="category-15-18" class="category-section">
+                <h3 class="category-title">🎓 Cours pour les 15-18 ans</h3>
+                <div id="subcategories-15-18"></div>
+            </div>
+
+            <!-- Courses for 18-25 years old -->
+            <div id="category-18-25" class="category-section">
+                <h3 class="category-title">💼 Cours pour les 18-25 ans</h3>
+                <div id="subcategories-18-25"></div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Thuun. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Titre du cours</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="video-container">
+                <video id="courseVideo" controls>
+                    <source src="" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture vidéo.
+                </video>
+            </div>
+            <div class="modal-details">
+                <div class="detail-row">
+                    <div class="detail-label">📝 Description</div>
+                    <div class="detail-value" id="modalDescription"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">👨‍🏫 Instructeur</div>
+                    <div class="detail-value" id="modalInstructor"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">⏱️ Durée et Niveau</div>
+                    <div class="detail-value">
+                        <span id="modalDuration"></span> • <span class="level-badge" id="levelBadge"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Panel -->
+    <div id="quizOverlay" class="quiz-overlay" onclick="closeQuiz()"></div>
+    <div id="quizPanel" class="quiz-panel">
+        <div class="quiz-header">
+            <h2 id="quizTitle">Quiz du Cours</h2>
+            <p id="quizSubtitle">Teste tes connaissances !</p>
+            <button class="quiz-close" onclick="closeQuiz()">×</button>
+        </div>
+        <div class="quiz-content">
+            <div class="quiz-instruction">
+                <h3>📋 Comment jouer ?</h3>
+                <p>Clique sur un post-it jaune pour découvrir la question. Clique à nouveau pour voir la réponse ! Chaque fois que tu recliques, une nouvelle question apparaît.</p>
+            </div>
+            <div id="postitsGrid" class="postits-grid">
+                <!-- Les post-it seront générés ici par JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Données des cours
+        let coursesData = [];
+
+        // Charger les cours au démarrage
+        document.addEventListener('DOMContentLoaded', loadCoursesData);
+
+        async function loadCoursesData() {
+            try {
+                const response = await fetch(`${API_URL}/courses`);
+                const result = await response.json();
+
+                if (result.success) {
+                    coursesData = result.data;
+                    displayAllCourses();
+                } else {
+                    showError('Erreur lors du chargement des cours');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showError('Impossible de charger les cours. Vérifiez la connexion.');
+            }
+        }
+
+        function selectCategory(category) {
+            // Mettre à jour les boutons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Afficher/masquer les sections
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`category-${category}`).classList.add('active');
+
+            playClickSound();
+        }
+
+        function displayAllCourses() {
+            const ageGroups = ['12-14', '15-18', '18-25'];
+
+            ageGroups.forEach(ageGroup => {
+                const container = document.getElementById(`subcategories-${ageGroup}`);
+                
+                // Filtrer les cours pour cette catégorie d'âge
+                const ageCourses = coursesData.filter(c => c.ageCategory === ageGroup);
+                
+                if (ageCourses.length === 0) {
+                    container.innerHTML = '<div class="no-courses">Aucun cours disponible pour cette catégorie</div>';
+                    return;
+                }
+
+                // Grouper par catégorie
+                const coursesByCategory = {};
+                ageCourses.forEach(course => {
+                    const cat = course.category || 'Tous nos cours';
+                    if (!coursesByCategory[cat]) {
+                        coursesByCategory[cat] = [];
+                    }
+                    coursesByCategory[cat].push(course);
+                });
+
+                // Ordre des catégories : "Cours du jour" en premier
+                const categoryOrder = ['Cours du jour', 'Tous nos cours'];
+                const sortedCategories = Object.keys(coursesByCategory).sort((a, b) => {
+                    const indexA = categoryOrder.indexOf(a);
+                    const indexB = categoryOrder.indexOf(b);
+                    if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+                    if (indexA === -1) return 1;
+                    if (indexB === -1) return -1;
+                    return indexA - indexB;
+                });
+
+                // Créer les sections de sous-catégories
+                let html = '';
+                sortedCategories.forEach(categoryName => {
+                    const courses = coursesByCategory[categoryName];
+                    const badge = categoryName === 'Cours du jour' ? '<span class="subcategory-badge">🌟 Nouveau</span>' : '';
+                    
+                    html += `
+                        <div class="subcategory-section">
+                            <div class="subcategory-header">
+                                <h4>${getCategoryEmoji(categoryName)} ${categoryName}</h4>
+                                ${badge}
+                            </div>
+                            <div class="courses-grid">
+                                ${courses.map(course => createCourseCard(course)).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+            });
+        }
+
+        function getCategoryEmoji(categoryName) {
+            if (categoryName === 'Cours du jour') return '⭐';
+            if (categoryName === 'Tous nos cours') return '📚';
+            return '📖';
+        }
+
+        function createCourseCard(course) {
+            return `
+                <div class="course-card">
+                    <div class="course-card-header">
+                        <h3>${course.nom}</h3>
+                        <div class="course-meta">
+                            <span>${getLevelEmoji(course.niveau)} ${course.niveau}</span>
+                            <span>👨‍🏫 ${course.instructor}</span>
+                            <span>📅 ${formatDate(course.date)}</span>
+                        </div>
+                    </div>
+                    <div class="course-card-body">
+                        <p class="course-description">${course.description}</p>
+                    </div>
+                    <div class="course-card-footer">
+                        <div class="course-info">
+                            <div class="instructor">${course.instructor}</div>
+                            <div class="duration">⏱️ ${course.duree}</div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="course-btn course-btn-video" onclick="openVideo(${course.id})">
+                                Vidéo
+                            </button>
+                            <button class="course-btn course-btn-quiz" onclick="openQuiz(${course.id})">
+                                Quiz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('fr-FR', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        function getLevelEmoji(level) {
+            switch(level) {
+                case 'Débutant': return '🟢';
+                case 'Intermédiaire': return '🟡';
+                case 'Avancé': return '🔴';
+                default: return '⭐';
+            }
+        }
+
+        function getLevelClass(level) {
+            switch(level) {
+                case 'Débutant': return 'level-beginner';
+                case 'Intermédiaire': return 'level-intermediate';
+                case 'Avancé': return 'level-advanced';
+                default: return '';
+            }
+        }
+
+        async function openVideo(courseId) {
+            try {
+                playClickSound();
+
+                const response = await fetch(`${API_URL}/courses/${courseId}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const course = result.data;
+                    document.getElementById('modalTitle').textContent = course.nom;
+                    document.getElementById('courseVideo').src = course.video;
+                    document.getElementById('modalDescription').textContent = course.description;
+                    document.getElementById('modalInstructor').textContent = course.instructor;
+                    document.getElementById('modalDuration').textContent = course.duree;
+
+                    const badge = document.getElementById('levelBadge');
+                    badge.textContent = course.niveau;
+                    badge.className = `level-badge ${getLevelClass(course.niveau)}`;
+
+                    document.getElementById('videoModal').classList.add('active');
+                } else {
+                    alert('Erreur lors du chargement du cours');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Impossible de charger la vidéo');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('videoModal').classList.remove('active');
+            const video = document.getElementById('courseVideo');
+            video.pause();
+            video.currentTime = 0;
+        }
+
+        // Fermer le modal en cliquant en dehors
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // Fermer le modal avec la touche Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function showError(message) {
+            const categories = ['12-14', '15-18', '18-25'];
+            categories.forEach(cat => {
+                const container = document.getElementById(`subcategories-${cat}`);
+                if (container) {
+                    container.innerHTML = `<div class="no-courses">${message}</div>`;
+                }
+            });
+        }
+
+        function goBack() {
+            window.location.href = 'home.html';
+        }
+
+        // Gestion du Quiz
+        let currentQuiz = [];
+        let usedQuestions = [];
+
+        function openQuiz(courseId) {
+            try {
+                playClickSound();
+
+                const course = coursesData.find(c => c.id === courseId);
+                if (!course || !course.quiz || course.quiz.length === 0) {
+                    alert('Aucun quiz disponible pour ce cours');
+                    return;
+                }
+
+                currentQuiz = course.quiz;
+                usedQuestions = [];
+
+                document.getElementById('quizTitle').textContent = course.nom;
+                document.getElementById('quizSubtitle').textContent = `${course.quiz.length} questions disponibles`;
+
+                generatePostits();
+
+                document.getElementById('quizPanel').classList.add('active');
+                document.getElementById('quizOverlay').classList.add('active');
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors du chargement du quiz');
+            }
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizPanel').classList.remove('active');
+            document.getElementById('quizOverlay').classList.remove('active');
+        }
+
+        function generatePostits() {
+            const container = document.getElementById('postitsGrid');
+            const numPostits = Math.min(6, currentQuiz.length);
+
+            let html = '';
+            for (let i = 0; i < numPostits; i++) {
+                const question = getRandomQuestion();
+                html += `
+                    <div class="postit" id="postit-${i}" onclick="flipPostit(${i})">
+                        <div class="postit-inner">
+                            <div class="postit-front">
+                                <p>${question.question}</p>
+                            </div>
+                            <div class="postit-back">
+                                <p>${question.reponse}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function getRandomQuestion() {
+            let availableQuestions = currentQuiz.filter((q, index) => !usedQuestions.includes(index));
+
+            // Si toutes les questions ont été utilisées, on réinitialise
+            if (availableQuestions.length === 0) {
+                usedQuestions = [];
+                availableQuestions = currentQuiz;
+            }
+
+            const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+            const selectedQuestion = availableQuestions[randomIndex];
+
+            // Marquer la question comme utilisée
+            const originalIndex = currentQuiz.findIndex(q => q.question === selectedQuestion.question);
+            usedQuestions.push(originalIndex);
+
+            return selectedQuestion;
+        }
+
+        function flipPostit(index) {
+            playClickSound();
+
+            const postit = document.getElementById(`postit-${index}`);
+            const isFlipped = postit.classList.contains('flipped');
+
+            if (isFlipped) {
+                // Si déjà retourné, on le remet à l'endroit avec une nouvelle question
+                postit.classList.remove('flipped');
+
+                setTimeout(() => {
+                    const question = getRandomQuestion();
+                    const front = postit.querySelector('.postit-front p');
+                    const back = postit.querySelector('.postit-back p');
+                    front.textContent = question.question;
+                    back.textContent = question.reponse;
+                }, 300);
+            } else {
+                // Sinon on le retourne pour montrer la réponse
+                postit.classList.add('flipped');
+            }
+        }
+    </script>
+</body>
+</html>
