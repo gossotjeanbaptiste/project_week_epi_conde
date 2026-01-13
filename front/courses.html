@@ -690,15 +690,19 @@
 <body>
     <div class="container">
         <header class="header">
-            <div class="header-top">
-                <h1 class="logo">thuun</h1>
-                <button class="logout-btn" onclick="handleLogout()">Déconnexion</button>
-            </div>
+            <button class="logout-btn-icon" onclick="handleLogout()" title="Déconnexion">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+            </button>
+            <!-- <img src="logo.png" alt="tuun Logo" class="logo-img"> -->
+            <h1 class="logo">tuun</h1>
             <p class="tagline">Votre banque digitale</p>
         </header>
 
         <main class="main-content courses-page">
-            <button class="back-to-home" onclick="goBack()">← Retour à l'accueil</button>
 
             <div class="courses-header">
                 <h2>📚 Nos Cours de Finance</h2>
@@ -730,6 +734,25 @@
                 <div id="subcategories-18-25"></div>
             </div>
         </main>
+
+        <nav class="bottom-nav">
+            <div class="nav-buttons-row">
+                <button class="bottom-nav-btn" onclick="goBack()">
+                    <span>🏠</span>
+                    <span>Accueil</span>
+                </button>
+
+                <button class="bottom-nav-btn" onclick="navigateTo('account')">
+                    <span>👤</span>
+                    <span>Compte</span>
+                </button>
+
+                <button class="bottom-nav-btn" onclick="navigateTo('advisor')">
+                    <span>💼</span>
+                    <span>Conseiller</span>
+                </button>
+            </div>
+        </nav>
 
         <footer class="footer">
             <p>&copy; 2026 Thuun. Tous droits réservés.</p>

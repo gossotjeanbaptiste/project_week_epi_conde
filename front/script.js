@@ -151,3 +151,12 @@ function handleLogout() {
         window.location.href = 'index.html';
     }, 100);
 }
+
+// Fonction pour revenir à l'accueil
+function goBack() {
+    playClickSound();
+    
+    setTimeout(() => {
+        window.location.href = 'home.html';
+    }, 100);
+}
