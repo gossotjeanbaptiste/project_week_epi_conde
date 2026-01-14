@@ -13,4 +13,7 @@ router.get('/me', authMiddleware, (req, res) => {
     res.json({ user: req.user });
 });
 
+router.get('/profile', authMiddleware, authController.getProfile);
+router.put('/solde', authMiddleware, authController.updateSolde);
+
 module.exports = router;

@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
         // Récupérer l'utilisateur
         const connection = await pool.getConnection();
         const [users] = await connection.query(
-            'SELECT id, email, password, nom, prenom FROM users WHERE email = ?',
+            'SELECT id, email, password, nom, prenom, solde, solde_max FROM users WHERE email = ?',
             [email]
         );
         connection.release();
@@ -58,7 +58,9 @@ exports.login = async (req, res) => {
                 id: user.id,
                 email: user.email,
                 nom: user.nom,
-                prenom: user.prenom
+                prenom: user.prenom,
+                solde: user.solde,
+                solde_max: user.solde_max
             }
         });
     } catch (error) {
@@ -118,6 +120,104 @@ exports.register = async (req, res) => {
         res.status(500).json({ 
             success: false,
             message: 'Erreur serveur' 
+        });
+    }
+};
+
+exports.getProfile = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const connection = await pool.getConnection();
+        const [users] = await connection.query(
+            'SELECT id, email, nom, prenom, solde, solde_max, created_at FROM users WHERE id = ?',
+            [userId]
+        );
+        connection.release();
+
+        if (users.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Utilisateur non trouvé'
+            });
+        }
+
+        const user = users[0];
+        res.status(200).json({
+            success: true,
+            user: {
+                id: user.id,
+                email: user.email,
+                nom: user.nom,
+                prenom: user.prenom,
+                solde: user.solde,
+                solde_max: user.solde_max,
+                created_at: user.created_at
+            }
+        });
+    } catch (error) {
+        console.error('❌ Erreur getProfile:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erreur serveur'
+        });
+    }
+};
+
+exports.updateSolde = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { solde } = req.body;
+
+        if (solde === undefined || solde === null) {
+            return res.status(400).json({
+                success: false,
+                message: 'Le solde est requis'
+            });
+        }
+
+        const newSolde = parseFloat(solde);
+        const connection = await pool.getConnection();
+
+        // Récupérer le solde_max actuel
+        const [users] = await connection.query(
+            'SELECT solde_max FROM users WHERE id = ?',
+            [userId]
+        );
+
+        if (users.length === 0) {
+            connection.release();
+            return res.status(404).json({
+                success: false,
+                message: 'Utilisateur non trouvé'
+            });
+        }
+
+        const currentSoldeMax = parseFloat(users[0].solde_max);
+        const newSoldeMax = Math.max(newSolde, currentSoldeMax);
+
+        // Mettre à jour solde et solde_max si nécessaire
+        await connection.query(
+            'UPDATE users SET solde = ?, solde_max = ? WHERE id = ?',
+            [newSolde, newSoldeMax, userId]
+        );
+        connection.release();
+
+        console.log(`✅ Solde mis à jour pour utilisateur ${userId}: ${newSolde} (max: ${newSoldeMax})`);
+
+        res.status(200).json({
+            success: true,
+            message: 'Solde mis à jour',
+            user: {
+                solde: newSolde,
+                solde_max: newSoldeMax
+            }
+        });
+    } catch (error) {
+        console.error('❌ Erreur updateSolde:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erreur serveur'
         });
     }
 };
