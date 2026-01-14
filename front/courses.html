@@ -3,321 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thuun - Nos Cours</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Thuun - Mes Cours</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Override du body pour la page courses */
+        /* Page courses - design iPhone 16 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            background: #d0e2f4;
             min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            border-radius: 0;
-        }
-
-        /* Courses Page Styles */
-        .courses-page {
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
+        .courses-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            max-height: 100vh;
+        }
+
+        /* Header minimaliste */
         .courses-header {
+            padding: 20px;
             text-align: center;
-            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
         }
 
-        .courses-header h2 {
-            font-size: 36px;
+        .courses-header h1 {
+            margin: 0;
+            font-size: 24px;
             color: #0a2463;
-            margin-bottom: 10px;
             font-weight: 700;
         }
 
-        .courses-header p {
-            font-size: 16px;
-            color: #666;
-        }
-
-        /* Age Category Selector */
-        .age-categories {
+        /* Main content */
+        .courses-main {
+            flex: 1;
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin: 0 auto;
         }
 
-        .category-btn {
-            padding: 12px 28px;
-            border: 2px solid #e0e0e0;
-            background: white;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            color: #666;
+        /* Decorative background shape */
+        .courses-bg-shape {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 40%;
+            background: #DB7C3B;
+            clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%);
+            z-index: 0;
+            pointer-events: none;
         }
 
-        .category-btn:hover {
-            border-color: #247ba0;
-            color: #247ba0;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(36, 123, 160, 0.2);
+        /* Floating wave */
+        .floating-wave {
+            position: fixed;
+            bottom: 160px;
+            left: 0px;
+            width: 200%;
+            height: 80px;
+            z-index: 1;
+            pointer-events: none;
+            overflow: visible;
         }
-
-        .category-btn.active {
-            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
-            color: white;
-            border-color: #247ba0;
-            box-shadow: 0 6px 20px rgba(36, 123, 160, 0.3);
-        }
-
-        /* Category Section */
-        .category-section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .category-section.active {
+        
+        .wave-svg {
+            width: 200%;
+            height: 100%;
             display: block;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
+        .wave-fill {
+            animation: moveWave 8s linear infinite;
+        }
+
+        .wave-1 .wave-fill {
+            animation: moveWave 8s linear infinite;
+            opacity: 1;
+        }
+
+        .wave-2 .wave-fill {
+            animation: moveWave 10s linear infinite;
+            opacity: 1;
+            animation-delay: -2s;
+        }
+
+        .wave-3 .wave-fill {
+            animation: moveWave 12s linear infinite;
+            opacity: 1;
+            animation-delay: -4s;
+        }
+
+        .wave-3 {
+            z-index: 0;
+        }
+
+        .wave-2 {
+            z-index: 1;
+        }
+
+        .wave-1 {
+            z-index: 2;
+        }
+
+        @keyframes moveWave {
+            0% {
+                transform: translateX(0);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            100% {
+                transform: translateX(-2400px);
             }
         }
 
-        .category-title {
-            font-size: 26px;
-            color: #0a2463;
-            margin-bottom: 25px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
+        /* Decorative circles */
+        .deco-circle {
+            position: fixed;
+            background: #DB7C3B;
+            border-radius: 50%;
+            z-index: 0;
+            animation: float linear infinite;
+            pointer-events: none;
+        }
+
+        .deco-circle-1 {
+            width: 34px;
+            height: 35px;
+            bottom: 35%;
+            left: 15%;
+            animation-duration: 2s;
+        }
+
+        .deco-circle-2 {
+            width: 15px;
+            height: 15px;
+            top: 25%;
+            left: 50%;
+            animation-duration: 2.5s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-3 {
+            width: 39px;
+            height: 41px;
+            top: 15%;
+            right: 10%;
+            animation-duration: 2.2s;
+        }
+
+        .deco-circle-4 {
+            width: 39px;
+            height: 41px;
+            bottom: 20%;
+            left: 10%;
+            animation-duration: 2.7s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-5 {
+            width: 20px;
+            height: 21px;
+            top: 5%;
+            right: 5%;
+            animation-duration: 2.3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+        }
+
+        /* Categories selector */
+        .categories-selector {
+            z-index: 3;
+            display: none;
             gap: 10px;
-        }
-
-        /* Sub-categories within age groups */
-        .subcategory-section {
-            margin-bottom: 50px;
-        }
-
-        .subcategory-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding: 15px 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid #247ba0;
-        }
-
-        .subcategory-header h4 {
-            margin: 0;
-            font-size: 20px;
-            color: #0a2463;
-            font-weight: 700;
-        }
-
-        .subcategory-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
-            color: white;
-            border-radius: 15px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Courses Grid */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .course-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            border-top: 4px solid #247ba0;
-        }
-
-        .course-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-            border-top-color: #0a2463;
-        }
-
-        .course-card-header {
-            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
-            color: white;
-            padding: 20px;
-            min-height: 100px;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
-        }
-
-        .course-card-header h3 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        .course-meta {
-            display: flex;
-            gap: 12px;
-            margin-top: 12px;
             flex-wrap: wrap;
-            font-size: 12px;
-        }
-
-        .course-meta span {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 10px;
-            border-radius: 12px;
-            backdrop-filter: blur(5px);
-        }
-
-        .course-card-body {
-            padding: 20px;
-            background: white;
-        }
-
-        .course-description {
-            color: #555;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 0;
-        }
-
-        .course-card-footer {
             padding: 15px 20px;
-            border-top: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #fafafa;
-            gap: 10px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        .course-info {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
-        }
-
-        .instructor {
-            font-size: 12px;
-            color: #999;
-        }
-
-        .duration {
-            font-size: 13px;
-            color: #666;
-            font-weight: 600;
-        }
-
-        .course-actions {
-            display: flex;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
-        .course-btn {
-            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
-            color: white;
-            border: none;
+        .category-btn {
             padding: 10px 18px;
+            border: 2px solid #DB7C3B;
+            background: white;
+            color: #DB7C3B;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 600;
             font-size: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(10, 36, 99, 0.2);
-            white-space: nowrap;
+            animation: slideUp 0.6s ease forwards;
+            opacity: 0;
         }
 
-        .course-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(10, 36, 99, 0.3);
+        .category-btn:nth-child(1) { animation-delay: 0.1s; }
+        .category-btn:nth-child(2) { animation-delay: 0.2s; }
+        .category-btn:nth-child(3) { animation-delay: 0.3s; }
+
+        .category-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(219, 124, 59, 0.3);
         }
 
-        .course-btn-video::before {
-            content: "▶ ";
-            margin-right: 4px;
-        }
-
-        .course-btn-quiz {
-            background: linear-gradient(135deg, #00c896 0%, #00a876 100%);
-        }
-
-        .course-btn-quiz::before {
-            content: "📝 ";
-            margin-right: 4px;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            overflow-y: auto;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 900px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.4s ease;
-            margin: 40px auto;
+        .category-btn.active {
+            background: #DB7C3B;
+            color: white;
+            box-shadow: 0 6px 16px rgba(219, 124, 59, 0.4);
         }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -325,230 +246,397 @@
             }
         }
 
-        .modal-header {
-            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
-            color: white;
-            padding: 25px;
+        /* Scrollable courses container */
+        .courses-scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 20px;
+            padding-bottom: 200px;
+            z-index: 3;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        .modal-header h2 {
-            margin: 0;
-            font-size: 24px;
+        /* Category section */
+        .age-category-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            color: #0a2463;
             font-weight: 700;
+            animation: fadeIn 0.8s ease;
         }
 
-        .close-btn {
-            background: none;
+        .subcategory {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .subcategory-title {
+            font-size: 15px;
+            color: #DB7C3B;
+            font-weight: 600;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            animation: fadeIn 0.8s ease;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Carousel for "Tous les cours" */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            width: 100%;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 280px;
+            animation: fadeIn 0.8s ease;
+            text-align: center;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 10px;
+            background: rgba(219, 124, 59, 0.9);
             border: none;
             color: white;
-            font-size: 28px;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-        }
-
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .video-container {
-            background: #000;
-            width: 100%;
-            aspect-ratio: 16/9;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 10;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .carousel-nav:hover {
+            background: #DB7C3B;
+            transform: scale(1.1);
         }
 
-        .modal-details {
-            padding: 30px;
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .dot.active {
             background: white;
+            transform: scale(1.3);
         }
 
-        .detail-row {
-            margin-bottom: 18px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid #f0f0f0;
+        .course-title {
+            font-size: 18px;
+            color: #0a2463;
+            font-weight: 700;
+            line-height: 1.4;
         }
 
-        .detail-row:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
+        .course-description {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
         }
 
-        .detail-label {
+        .course-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .meta-tag {
+            background: #DB7C3B;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .meta-tag.debutant {
+            background: #4caf50;
+        }
+
+        .meta-tag.intermediaire {
+            background: #ff9800;
+        }
+
+        .meta-tag.avance {
+            background: #f44336;
+        }
+
+        .course-duration {
             font-size: 12px;
             color: #999;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
+            margin-top: 10px;
         }
 
-        .detail-value {
-            font-size: 15px;
-            color: #333;
-            line-height: 1.6;
+        .course-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .level-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
+        .course-btn {
+            flex: 1;
+            padding: 12px 16px;
+            background: #DB7C3B;
             color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(219, 124, 59, 0.2);
         }
 
-        .level-beginner {
-            background: #00c896;
+        .course-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(219, 124, 59, 0.3);
         }
 
-        .level-intermediate {
-            background: #ffa500;
-        }
-
-        .level-advanced {
-            background: #ff6b6b;
-        }
-
-        /* Quiz Panel Styles */
-        .quiz-panel {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 90%;
-            max-width: 600px;
-            height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
-            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 2000;
-            overflow-y: auto;
-        }
-
-        .quiz-panel.active {
-            right: 0;
-        }
-
-        .quiz-overlay {
+        /* Video Modal */
+        .video-modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 1999;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
         }
 
-        .quiz-overlay.active {
-            display: block;
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-content {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+
+        .close-video-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 210;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .close-video-btn:hover {
+            background: rgba(219, 124, 59, 0.9);
+            transform: rotate(90deg);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Quiz Modal */
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .quiz-modal.active {
+            display: flex;
+        }
+
+        .quiz-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
         }
 
         .quiz-header {
-            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
-            color: white;
-            padding: 25px;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        .quiz-header h2 {
-            margin: 0 0 10px 0;
-            font-size: 22px;
+        .quiz-title {
+            font-size: 20px;
+            color: #0a2463;
+            font-weight: 700;
+            margin-bottom: 5px;
         }
 
-        .quiz-header p {
-            margin: 0;
-            opacity: 0.9;
-            font-size: 14px;
+        .quiz-subtitle {
+            font-size: 13px;
+            color: #999;
         }
 
-        .quiz-close {
+        .close-quiz-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
+            top: 15px;
+            right: 15px;
+            background: none;
             border: none;
+            font-size: 28px;
             color: white;
-            font-size: 24px;
+            cursor: pointer;
             width: 40px;
             height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 101;
+            transition: all 0.3s ease;
+        }
+
+        .close-quiz-btn:hover {
+            transform: rotate(90deg);
+            color: #DB7C3B;
+        }
+
+        /* Postit Carousel */
+        .postit-carousel-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            perspective: 1000px;
+        }
+
+        .postit-carousel {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .quiz-close:hover {
-            background: white;
-            color: #0a2463;
-            transform: rotate(90deg);
-        }
-
-        .quiz-content {
-            padding: 30px 25px;
-        }
-
-        .quiz-instruction {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .quiz-instruction h3 {
-            margin: 0 0 10px 0;
-            color: #0a2463;
-            font-size: 18px;
-        }
-
-        .quiz-instruction p {
-            margin: 0;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Post-it Notes */
-        .postits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-        }
-
         .postit {
-            perspective: 1000px;
-            cursor: pointer;
+            position: absolute;
+            width: 200px;
             height: 200px;
+            cursor: pointer;
+            perspective: 1000px;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         .postit-inner {
             position: relative;
             width: 100%;
             height: 100%;
-            text-align: center;
             transition: transform 0.6s;
             transform-style: preserve-3d;
         }
@@ -563,261 +651,232 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
+            font-weight: 600;
+            line-height: 1.4;
+            font-size: 13px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
         .postit-front {
             background: #ffeb3b;
             color: #333;
-            font-weight: 600;
-            font-size: 15px;
-            line-height: 1.5;
+            z-index: 2;
         }
 
         .postit-back {
             background: #4caf50;
             color: white;
             transform: rotateY(180deg);
-            font-size: 14px;
-            line-height: 1.6;
         }
 
-        .postit:hover .postit-inner {
-            transform: scale(1.05);
-        }
-
-        .postit.flipped:hover .postit-inner {
-            transform: rotateY(180deg) scale(1.05);
-        }
-
-        /* Back Button */
-        .back-to-home {
-            display: inline-flex;
-            align-items: center;
+        .postit-controls {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
             gap: 8px;
-            background: none;
+            z-index: 10;
+        }
+
+        .postit-arrow {
+            background: rgba(219, 124, 59, 0.9);
             border: none;
-            color: #0a2463;
-            font-weight: 600;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 14px;
-            margin-bottom: 20px;
+            font-weight: 700;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .back-to-home:hover {
-            color: #247ba0;
-            transform: translateX(-5px);
+        .postit-arrow:hover {
+            background: #DB7C3B;
+            transform: scale(1.1);
         }
 
-        /* Loading & Error States */
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-            color: #999;
-            font-size: 16px;
+        /* Bottom nav circles */
+        .bottom-circles {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 20px;
         }
 
-        .no-courses {
-            text-align: center;
-            padding: 40px;
+        .circle-nav {
+            width: 105px;
+            height: 105px;
             background: white;
-            border-radius: 15px;
+            border-radius: 50%;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 24px;
+            border: none;
+        }
+
+        .circle-nav:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Footer */
+        .courses-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+            background: white;
+            z-index: 3;
+        }
+
+        .courses-footer p {
+            margin: 5px 0;
+            font-size: 12px;
             color: #999;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                margin: 0;
-                border-radius: 0;
-                min-height: 100vh;
+        /* Responsive */
+        @media (max-width: 600px) {
+            .courses-scroll-container {
+                padding: 15px;
             }
 
-            .courses-page {
-                gap: 20px;
-            }
-
-            .courses-header h2 {
-                font-size: 28px;
-            }
-
-            .age-categories {
-                flex-direction: column;
-            }
-
-            .courses-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .course-card-footer {
-                flex-direction: column;
+            .bottom-circles {
                 gap: 12px;
-                align-items: flex-start;
             }
 
-            .course-btn {
-                width: 100%;
-                margin-left: 0;
-                text-align: center;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 20px auto;
-                border-radius: 12px;
-            }
-
-            .modal-header {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-
-            .close-btn {
-                align-self: flex-end;
+            .circle-nav {
+                width: 85px;
+                height: 85px;
+                font-size: 18px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <button class="logout-btn-icon" onclick="handleLogout()" title="Déconnexion">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                    <polyline points="16 17 21 12 16 7"></polyline>
-                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                </svg>
-            </button>
-            <!-- <img src="logo.png" alt="tuun Logo" class="logo-img"> -->
-            <h1 class="logo">tuun</h1>
-            <p class="tagline">Votre banque digitale</p>
-        </header>
+    <div class="courses-container">
+        <!-- Background elements -->
+        <div class="floating-wave wave-1">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#DB7C3B"/>
+            </svg>
+        </div>
+        <div class="floating-wave wave-2">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#E89761"/>
+            </svg>
+        </div>
+        <div class="floating-wave wave-3">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#F0B896"/>
+            </svg>
+        </div>
+        <div class="courses-bg-shape"></div>
+        <div class="deco-circle deco-circle-1"></div>
+        <div class="deco-circle deco-circle-2"></div>
+        <div class="deco-circle deco-circle-3"></div>
+        <div class="deco-circle deco-circle-4"></div>
+        <div class="deco-circle deco-circle-5"></div>
 
-        <main class="main-content courses-page">
+        <!-- Header -->
+        <div class="courses-header">
+            <h1>Thuun</h1>
+        </div>
 
-            <div class="courses-header">
-                <h2>📚 Nos Cours de Finance</h2>
-                <p>Apprends les bases de la banque et de la gestion financière à ton rythme</p>
+        <!-- Main content -->
+        <div class="courses-main">
+            <!-- Categories selector -->
+            <div class="categories-selector">
+                <button class="category-btn active" onclick="scrollToCategory('12-14')">🎮 12-14 ans</button>
+                <button class="category-btn" onclick="scrollToCategory('15-18')">🎓 15-18 ans</button>
+                <button class="category-btn" onclick="scrollToCategory('18-25')">💼 18-25 ans</button>
             </div>
 
-            <!-- Category Selector -->
-            <div class="age-categories">
-                <button class="category-btn active" onclick="selectCategory('12-14')">🎮 12-14 ans</button>
-                <button class="category-btn" onclick="selectCategory('15-18')">🎓 15-18 ans</button>
-                <button class="category-btn" onclick="selectCategory('18-25')">💼 18-25 ans</button>
+            <!-- Scrollable courses container -->
+            <div class="courses-scroll-container" id="coursesScroll">
+                <!-- Categories will be generated by JS -->
             </div>
+        </div>
 
-            <!-- Courses for 12-14 years old -->
-            <div id="category-12-14" class="category-section active">
-                <h3 class="category-title">🎮 Cours pour les 12-14 ans</h3>
-                <div id="subcategories-12-14"></div>
-            </div>
-
-            <!-- Courses for 15-18 years old -->
-            <div id="category-15-18" class="category-section">
-                <h3 class="category-title">🎓 Cours pour les 15-18 ans</h3>
-                <div id="subcategories-15-18"></div>
-            </div>
-
-            <!-- Courses for 18-25 years old -->
-            <div id="category-18-25" class="category-section">
-                <h3 class="category-title">💼 Cours pour les 18-25 ans</h3>
-                <div id="subcategories-18-25"></div>
-            </div>
-        </main>
-
-        <nav class="bottom-nav">
-            <div class="nav-buttons-row">
-                <button class="bottom-nav-btn" onclick="goBack()">
-                    <span>🏠</span>
-                    <span>Accueil</span>
-                </button>
-
-                <button class="bottom-nav-btn" onclick="navigateTo('account')">
-                    <span>👤</span>
-                    <span>Compte</span>
-                </button>
-
-                <button class="bottom-nav-btn" onclick="navigateTo('advisor')">
-                    <span>💼</span>
-                    <span>Conseiller</span>
-                </button>
-            </div>
-        </nav>
-
-        <footer class="footer">
-            <p>&copy; 2026 Thuun. Tous droits réservés.</p>
-            <p class="footer-credit">Conçu par Epitech | Semester 1</p>
-        </footer>
-    </div>
-
-    <!-- Video Modal -->
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle">Titre du cours</h2>
-                <button class="close-btn" onclick="closeModal()">×</button>
-            </div>
-            <div class="video-container">
-                <video id="courseVideo" controls>
-                    <source src="" type="video/mp4">
-                    Votre navigateur ne supporte pas la lecture vidéo.
-                </video>
-            </div>
-            <div class="modal-details">
-                <div class="detail-row">
-                    <div class="detail-label">📝 Description</div>
-                    <div class="detail-value" id="modalDescription"></div>
+        <!-- Quiz Modal -->
+        <div class="quiz-modal" id="quizModal">
+            <button class="close-quiz-btn" onclick="closeQuiz()">×</button>
+            <div class="quiz-content">
+                <div class="quiz-header">
+                    <div class="quiz-title" id="quizTitle">Quiz</div>
+                    <div class="quiz-subtitle" id="quizSubtitle">Questions et réponses</div>
                 </div>
-                <div class="detail-row">
-                    <div class="detail-label">👨‍🏫 Instructeur</div>
-                    <div class="detail-value" id="modalInstructor"></div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">⏱️ Durée et Niveau</div>
-                    <div class="detail-value">
-                        <span id="modalDuration"></span> • <span class="level-badge" id="levelBadge"></span>
+                <div class="postit-carousel-container">
+                    <div class="postit-carousel" id="postitCarousel"></div>
+                    <div class="postit-controls">
+                        <button class="postit-arrow" onclick="prevPostit()">‹</button>
+                        <button class="postit-arrow" onclick="nextPostit()">›</button>
                     </div>
                 </div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="course-btn" onclick="switchToVideo()" id="quizVideoBtn" style="display: none;">Voir la vidéo 🎬</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Quiz Panel -->
-    <div id="quizOverlay" class="quiz-overlay" onclick="closeQuiz()"></div>
-    <div id="quizPanel" class="quiz-panel">
-        <div class="quiz-header">
-            <h2 id="quizTitle">Quiz du Cours</h2>
-            <p id="quizSubtitle">Teste tes connaissances !</p>
-            <button class="quiz-close" onclick="closeQuiz()">×</button>
+        <!-- Video Modal -->
+        <div class="video-modal" id="videoModal">
+            <button class="close-video-btn" onclick="closeVideo()">×</button>
+            <div class="video-content">
+                <video class="video-player" id="videoPlayer" controls>
+                    <source id="videoSource" src="" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de vidéo.
+                </video>
+                <div style="padding: 20px; background: white; text-align: center;">
+                    <button class="course-btn" onclick="switchToQuiz()" id="videoQuizBtn" style="display: none;">Faire le Quiz 📝</button>
+                </div>
+            </div>
         </div>
-        <div class="quiz-content">
-            <div class="quiz-instruction">
-                <h3>📋 Comment jouer ?</h3>
-                <p>Clique sur un post-it jaune pour découvrir la question. Clique à nouveau pour voir la réponse ! Chaque fois que tu recliques, une nouvelle question apparaît.</p>
-            </div>
-            <div id="postitsGrid" class="postits-grid">
-                <!-- Les post-it seront générés ici par JavaScript -->
-            </div>
+
+        <!-- Bottom navigation circles -->
+        <div class="bottom-circles">
+            <button class="circle-nav" onclick="window.location.href='courses.html'" title="Cours">📚</button>
+            <button class="circle-nav" onclick="window.location.href='account.html'" title="Compte">🏠</button>
+            <button class="circle-nav" onclick="window.location.href='admin.html'" title="Admin">💼</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="courses-footer">
+            <p>&copy; 2026 Thuun. Tous droits réservés.</p>
         </div>
     </div>
 
     <script src="script.js"></script>
     <script>
-        // Données des cours
         let coursesData = [];
+        let carouselPositions = {};
+        let autoRotateIntervals = {};
+        let currentQuiz = [];
+        let currentPostitIndex = 0;
+        let currentCourseId = null;
+        let currentVideoUrl = null;
 
-        // Charger les cours au démarrage
-        document.addEventListener('DOMContentLoaded', loadCoursesData);
+        // Initialiser les données
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Loading courses...');
+            loadCoursesData();
+        });
 
         async function loadCoursesData() {
             try {
@@ -826,319 +885,513 @@
 
                 if (result.success) {
                     coursesData = result.data;
-                    displayAllCourses();
                 } else {
-                    showError('Erreur lors du chargement des cours');
+                    coursesData = getDummyCourses();
                 }
+
+                displayAllCourses();
             } catch (error) {
                 console.error('Erreur:', error);
-                showError('Impossible de charger les cours. Vérifiez la connexion.');
+                coursesData = getDummyCourses();
+                displayAllCourses();
             }
         }
 
-        function selectCategory(category) {
-            // Mettre à jour les boutons
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+        function getDummyCourses() {
+            return [
+                // 12-14 ans - Cours du jour
+                {
+                    id: 1,
+                    nom: 'Comprendre l\'épargne',
+                    description: 'Apprends comment économiser et faire grandir ton argent de poche.',
+                    niveau: 'Débutant',
+                    duree: '5 min',
+                    ageCategory: '12-14',
+                    category: 'Cours du jour',
+                    instructor: 'Sarah Martin',
+                    quiz: [
+                        { question: 'Qu\'est-ce que l\'épargne?', reponse: 'C\'est de l\'argent économisé pour l\'avenir' },
+                        { question: 'Pourquoi épargner?', reponse: 'Pour réaliser ses rêves et se préparer à l\'avenir' }
+                    ]
+                },
+                {
+                    id: 2,
+                    nom: 'Les bases du budget',
+                    description: 'Découvre comment gérer ton argent de poche efficacement.',
+                    niveau: 'Débutant',
+                    duree: '7 min',
+                    ageCategory: '12-14',
+                    category: 'Cours du jour',
+                    instructor: 'Thomas Durand',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un budget?', reponse: 'Un plan pour gérer son argent' },
+                        { question: 'Comment faire un budget?', reponse: 'Noter ses revenus et ses dépenses' }
+                    ]
+                },
+                // 12-14 ans - Tous les cours
+                {
+                    id: 3,
+                    nom: 'L\'importance des économies',
+                    description: 'Comprendre pourquoi économiser est important pour ton avenir.',
+                    niveau: 'Débutant',
+                    duree: '6 min',
+                    ageCategory: '12-14',
+                    category: 'Tous les cours',
+                    instructor: 'Marie Leclerc',
+                    quiz: [
+                        { question: 'Quand commencer à épargner?', reponse: 'Dès maintenant, peu importe ton âge' }
+                    ]
+                },
+                {
+                    id: 4,
+                    nom: 'Mon premier compte bancaire',
+                    description: 'Comment ouvrir et utiliser ton premier compte bancaire.',
+                    niveau: 'Débutant',
+                    duree: '8 min',
+                    ageCategory: '12-14',
+                    category: 'Tous les cours',
+                    instructor: 'Pierre Dubois',
+                    quiz: [
+                        { question: 'À quel âge ouvrir un compte?', reponse: 'À partir de 10-12 ans avec les parents' }
+                    ]
+                },
+                // 15-18 ans - Cours du jour
+                {
+                    id: 5,
+                    nom: 'Gérer son premier salaire',
+                    description: 'Guide complet pour gérer ton argent quand tu commences à travailler.',
+                    niveau: 'Intermédiaire',
+                    duree: '10 min',
+                    ageCategory: '15-18',
+                    category: 'Cours du jour',
+                    instructor: 'Lucas Fournier',
+                    quiz: [
+                        { question: 'Pourquoi faire un budget mensuel?', reponse: 'Pour maîtriser ses dépenses' }
+                    ]
+                },
+                {
+                    id: 6,
+                    nom: 'Investir en bourse simplement',
+                    description: 'Les premiers pas pour investir intelligemment.',
+                    niveau: 'Intermédiaire',
+                    duree: '12 min',
+                    ageCategory: '15-18',
+                    category: 'Cours du jour',
+                    instructor: 'Claire Moreau',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'une action?', reponse: 'Un titre de propriété d\'une entreprise' }
+                    ]
+                },
+                // 15-18 ans - Tous les cours
+                {
+                    id: 7,
+                    nom: 'Les impôts expliqués simplement',
+                    description: 'Comprendre comment fonctionnent les impôts en France.',
+                    niveau: 'Intermédiaire',
+                    duree: '9 min',
+                    ageCategory: '15-18',
+                    category: 'Tous les cours',
+                    instructor: 'Antoine Rousseau',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un impôt?', reponse: 'Une contribution au financement de l\'état' }
+                    ]
+                },
+                {
+                    id: 8,
+                    nom: 'Crédit et prêts: les bases',
+                    description: 'Comment fonctionnent les crédits et les prêts.',
+                    niveau: 'Intermédiaire',
+                    duree: '11 min',
+                    ageCategory: '15-18',
+                    category: 'Tous les cours',
+                    instructor: 'Juliette Bernard',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un taux d\'intérêt?', reponse: 'Le coût du crédit' }
+                    ]
+                },
+                // 18-25 ans - Cours du jour
+                {
+                    id: 9,
+                    nom: 'Crédit et prêts: bien les utiliser',
+                    description: 'Maîtriser l\'art du crédit pour réaliser tes projets.',
+                    niveau: 'Avancé',
+                    duree: '15 min',
+                    ageCategory: '18-25',
+                    category: 'Cours du jour',
+                    instructor: 'Antoine Rousseau',
+                    quiz: [
+                        { question: 'Qu\'est-ce que le taux d\'intérêt?', reponse: 'Le coût du crédit' }
+                    ]
+                },
+                {
+                    id: 10,
+                    nom: 'Planification financière à long terme',
+                    description: 'Construis un plan financier solide pour ta vie d\'adulte.',
+                    niveau: 'Avancé',
+                    duree: '20 min',
+                    ageCategory: '18-25',
+                    category: 'Cours du jour',
+                    instructor: 'Juliette Bernard',
+                    quiz: [
+                        { question: 'Qu\'est-ce que la retraite?', reponse: 'Une période sans travail financée par ses économies' }
+                    ]
+                },
+                // 18-25 ans - Tous les cours
+                {
+                    id: 11,
+                    nom: 'Investissement immobilier',
+                    description: 'Les principes de base pour investir dans l\'immobilier.',
+                    niveau: 'Avancé',
+                    duree: '18 min',
+                    ageCategory: '18-25',
+                    category: 'Tous les cours',
+                    instructor: 'Marc Lefevre',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un bien immobilier?', reponse: 'Une propriété (maison, appartement, terrain)' }
+                    ]
+                },
+                {
+                    id: 12,
+                    nom: 'Crypto-monnaies et blockchain',
+                    description: 'Découvre le monde des crypto-monnaies et de la blockchain.',
+                    niveau: 'Avancé',
+                    duree: '17 min',
+                    ageCategory: '18-25',
+                    category: 'Tous les cours',
+                    instructor: 'Sophie Laurent',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un Bitcoin?', reponse: 'Une monnaie numérique décentralisée' }
+                    ]
+                }
+            ];
+        }
 
-            // Afficher/masquer les sections
-            document.querySelectorAll('.category-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(`category-${category}`).classList.add('active');
+        let currentSelectedCategory = '12-14';
 
-            playClickSound();
+        function getAgeCategory(age) {
+            age = parseInt(age);
+            if (age >= 12 && age <= 14) return '12-14';
+            if (age >= 15 && age <= 18) return '15-18';
+            if (age >= 19 && age <= 25) return '18-25';
+            return '12-14'; // Par défaut
         }
 
         function displayAllCourses() {
-            const ageGroups = ['12-14', '15-18', '18-25'];
+            // Récupérer l'âge de l'utilisateur depuis localStorage
+            const user = JSON.parse(localStorage.getItem('thuun_user') || '{}');
+            const userAge = user.userAge || 18;
+            
+            // Déterminer la catégorie automatiquement
+            const ageCategory = getAgeCategory(userAge);
+            
+            displayCoursesForCategory(ageCategory);
+        }
 
-            ageGroups.forEach(ageGroup => {
-                const container = document.getElementById(`subcategories-${ageGroup}`);
-                
-                // Filtrer les cours pour cette catégorie d'âge
-                const ageCourses = coursesData.filter(c => c.ageCategory === ageGroup);
-                
-                if (ageCourses.length === 0) {
-                    container.innerHTML = '<div class="no-courses">Aucun cours disponible pour cette catégorie</div>';
-                    return;
-                }
+        function displayCoursesForCategory(ageCategory) {
+            const scroll = document.getElementById('coursesScroll');
+            const categoryLabels = {
+                '12-14': '🎮 12-14 ans',
+                '15-18': '🎓 15-18 ans',
+                '18-25': '💼 18-25 ans'
+            };
 
-                // Grouper par catégorie
-                const coursesByCategory = {};
-                ageCourses.forEach(course => {
-                    const cat = course.category || 'Tous nos cours';
-                    if (!coursesByCategory[cat]) {
-                        coursesByCategory[cat] = [];
-                    }
-                    coursesByCategory[cat].push(course);
-                });
+            currentSelectedCategory = ageCategory;
 
-                // Ordre des catégories : "Cours du jour" en premier
-                const categoryOrder = ['Cours du jour', 'Tous nos cours'];
-                const sortedCategories = Object.keys(coursesByCategory).sort((a, b) => {
-                    const indexA = categoryOrder.indexOf(a);
-                    const indexB = categoryOrder.indexOf(b);
-                    if (indexA === -1 && indexB === -1) return a.localeCompare(b);
-                    if (indexA === -1) return 1;
-                    if (indexB === -1) return -1;
-                    return indexA - indexB;
-                });
+            const dailyCourses = coursesData.filter(c => 
+                c.ageCategory === ageCategory && c.category === 'Cours du jour'
+            );
+            const allCourses = coursesData.filter(c => 
+                c.ageCategory === ageCategory && (c.category === 'Tous nos cours' || c.category === 'Tous les cours')
+            );
 
-                // Créer les sections de sous-catégories
-                let html = '';
-                sortedCategories.forEach(categoryName => {
-                    const courses = coursesByCategory[categoryName];
-                    const badge = categoryName === 'Cours du jour' ? '<span class="subcategory-badge">🌟 Nouveau</span>' : '';
+            console.log('Age Category:', ageCategory);
+            console.log('Daily Courses:', dailyCourses);
+            console.log('All Courses:', allCourses);
+            console.log('Total coursesData:', coursesData.length);
+
+            let html = `
+                <div class="age-category-section" id="section-${ageCategory}">
+                    <div class="category-title">${categoryLabels[ageCategory]}</div>
                     
-                    html += `
-                        <div class="subcategory-section">
-                            <div class="subcategory-header">
-                                <h4>${getCategoryEmoji(categoryName)} ${categoryName}</h4>
-                                ${badge}
+                    <div class="subcategory">
+                        <div class="subcategory-title">📚 Cours du Jour</div>
+                        <div class="courses-grid">
+                            ${dailyCourses.map((course, index) => createCourseCard(course, index)).join('')}
+                        </div>
+                    </div>
+
+                    <div class="subcategory">
+                        <div class="subcategory-title">📖 Tous les Cours</div>
+                        <div class="carousel-container">
+                            <div class="carousel" id="carousel-all-${ageCategory}">
+                                ${allCourses.map((course, index) => createCarouselSlide(course, index)).join('')}
                             </div>
-                            <div class="courses-grid">
-                                ${courses.map(course => createCourseCard(course)).join('')}
+                            <button class="carousel-nav prev" onclick="prevSlide('carousel-all-${ageCategory}')">‹</button>
+                            <button class="carousel-nav next" onclick="nextSlide('carousel-all-${ageCategory}')">›</button>
+                            <div class="carousel-dots" id="dots-all-${ageCategory}">
+                                ${allCourses.map((_, index) => `<div class="dot ${index === 0 ? 'active' : ''}" onclick="goToSlide('carousel-all-${ageCategory}', ${index})"></div>`).join('')}
                             </div>
                         </div>
-                    `;
-                });
+                    </div>
+                </div>
+            `;
 
-                container.innerHTML = html;
+            scroll.innerHTML = html;
+            initializeCarouselPositions(ageCategory, allCourses.length);
+        }
+
+        function updateCategoryButtons() {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
+            const activeBtn = document.querySelector(`[onclick="scrollToCategory('${currentSelectedCategory}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
         }
 
-        function getCategoryEmoji(categoryName) {
-            if (categoryName === 'Cours du jour') return '⭐';
-            if (categoryName === 'Tous nos cours') return '📚';
-            return '📖';
-        }
-
-        function createCourseCard(course) {
+        function createCourseCard(course, index) {
+            const niveauClass = course.niveau.toLowerCase().replace('é', 'e').replace(' ', '');
             return `
-                <div class="course-card">
-                    <div class="course-card-header">
-                        <h3>${course.nom}</h3>
-                        <div class="course-meta">
-                            <span>${getLevelEmoji(course.niveau)} ${course.niveau}</span>
-                            <span>👨‍🏫 ${course.instructor}</span>
-                            <span>📅 ${formatDate(course.date)}</span>
-                        </div>
+                <div class="course-card" data-index="${index}">
+                    <div class="course-title">${course.nom}</div>
+                    <div class="course-description">${course.description}</div>
+                    <div class="course-meta">
+                        <span class="meta-tag ${niveauClass}">${course.niveau}</span>
+                        <span class="meta-tag">👨‍🏫 ${course.instructor}</span>
                     </div>
-                    <div class="course-card-body">
-                        <p class="course-description">${course.description}</p>
-                    </div>
-                    <div class="course-card-footer">
-                        <div class="course-info">
-                            <div class="instructor">${course.instructor}</div>
-                            <div class="duration">⏱️ ${course.duree}</div>
-                        </div>
-                        <div class="course-actions">
-                            <button class="course-btn course-btn-video" onclick="openVideo(${course.id})">
-                                Vidéo
-                            </button>
-                            <button class="course-btn course-btn-quiz" onclick="openQuiz(${course.id})">
-                                Quiz
-                            </button>
-                        </div>
+                    <div class="course-duration">⏱️ ${course.duree}</div>
+                    <div class="course-actions">
+                        <button class="course-btn" onclick="openVideoWithCourse(${course.id}, '${course.video}')">Vidéo 🎬</button>
+                        <button class="course-btn" onclick="openQuiz(${course.id})">Quiz 📝</button>
                     </div>
                 </div>
             `;
         }
 
-        function formatDate(dateString) {
-            return new Date(dateString).toLocaleDateString('fr-FR', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
+        function createCarouselSlide(course, index) {
+            const niveauClass = course.niveau.toLowerCase().replace('é', 'e').replace(' ', '');
+            return `
+                <div class="carousel-slide" data-index="${index}">
+                    <div class="course-title">${course.nom}</div>
+                    <div class="course-description">${course.description}</div>
+                    <div class="course-meta">
+                        <span class="meta-tag ${niveauClass}">${course.niveau}</span>
+                        <span class="meta-tag">👨‍🏫 ${course.instructor}</span>
+                    </div>
+                    <div class="course-duration">⏱️ ${course.duree}</div>
+                    <div class="course-actions">
+                        <button class="course-btn" onclick="openVideoWithCourse(${course.id}, '${course.video}')">Vidéo 🎬</button>
+                        <button class="course-btn" onclick="openQuiz(${course.id})">Quiz 📝</button>
+                    </div>
+                </div>
+            `;
         }
 
-        function getLevelEmoji(level) {
-            switch(level) {
-                case 'Débutant': return '🟢';
-                case 'Intermédiaire': return '🟡';
-                case 'Avancé': return '🔴';
-                default: return '⭐';
+        function initializeCarouselPositions(ageCategory, count) {
+            carouselPositions[`carousel-all-${ageCategory}`] = 0;
+        }
+
+        function goToSlide(carouselId, index) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+            
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+            carouselPositions[carouselId] = index;
+
+            // Update dots
+            const dotsId = carouselId.replace('carousel', 'dots');
+            const dots = document.getElementById(dotsId);
+            if (dots) {
+                document.querySelectorAll(`#${dotsId} .dot`).forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
             }
         }
 
-        function getLevelClass(level) {
-            switch(level) {
-                case 'Débutant': return 'level-beginner';
-                case 'Intermédiaire': return 'level-intermediate';
-                case 'Avancé': return 'level-advanced';
-                default: return '';
+        function nextSlide(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const slideCount = carousel.querySelectorAll('.carousel-slide').length;
+            const currentIndex = carouselPositions[carouselId] || 0;
+            const nextIndex = (currentIndex + 1) % slideCount;
+            goToSlide(carouselId, nextIndex);
+        }
+
+        function prevSlide(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const slideCount = carousel.querySelectorAll('.carousel-slide').length;
+            const currentIndex = carouselPositions[carouselId] || 0;
+            const prevIndex = (currentIndex - 1 + slideCount) % slideCount;
+            goToSlide(carouselId, prevIndex);
+        }
+
+        function scrollToCategory(category) {
+            displayCoursesForCategory(category);
+            updateCategoryButtons();
+        }
+
+        function openVideo(videoUrl) {
+            if (!videoUrl) {
+                alert('Vidéo non disponible pour ce cours');
+                return;
             }
-        }
 
-        async function openVideo(courseId) {
-            try {
-                playClickSound();
-
-                const response = await fetch(`${API_URL}/courses/${courseId}`);
-                const result = await response.json();
-
-                if (result.success) {
-                    const course = result.data;
-                    document.getElementById('modalTitle').textContent = course.nom;
-                    document.getElementById('courseVideo').src = course.video;
-                    document.getElementById('modalDescription').textContent = course.description;
-                    document.getElementById('modalInstructor').textContent = course.instructor;
-                    document.getElementById('modalDuration').textContent = course.duree;
-
-                    const badge = document.getElementById('levelBadge');
-                    badge.textContent = course.niveau;
-                    badge.className = `level-badge ${getLevelClass(course.niveau)}`;
-
-                    document.getElementById('videoModal').classList.add('active');
-                } else {
-                    alert('Erreur lors du chargement du cours');
-                }
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Impossible de charger la vidéo');
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('videoModal').classList.remove('active');
-            const video = document.getElementById('courseVideo');
-            video.pause();
-            video.currentTime = 0;
-        }
-
-        // Fermer le modal en cliquant en dehors
-        window.onclick = function(event) {
             const modal = document.getElementById('videoModal');
-            if (event.target === modal) {
-                closeModal();
+            const videoSource = document.getElementById('videoSource');
+            const videoPlayer = document.getElementById('videoPlayer');
+            
+            videoSource.src = videoUrl;
+            videoPlayer.load();
+            modal.classList.add('active');
+            
+            // Afficher le bouton quiz si le cours actuel a un quiz
+            if (currentCourseId) {
+                document.getElementById('videoQuizBtn').style.display = 'block';
             }
-        };
-
-        // Fermer le modal avec la touche Escape
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        function showError(message) {
-            const categories = ['12-14', '15-18', '18-25'];
-            categories.forEach(cat => {
-                const container = document.getElementById(`subcategories-${cat}`);
-                if (container) {
-                    container.innerHTML = `<div class="no-courses">${message}</div>`;
-                }
-            });
         }
 
-        function goBack() {
-            window.location.href = 'home.html';
+        function openVideoWithCourse(courseId, videoUrl) {
+            currentCourseId = courseId;
+            const course = coursesData.find(c => c.id === courseId);
+            if (course) {
+                currentVideoUrl = course.video;
+            }
+
+            if (!videoUrl) {
+                alert('Vidéo non disponible pour ce cours');
+                return;
+            }
+
+            const modal = document.getElementById('videoModal');
+            const videoSource = document.getElementById('videoSource');
+            const videoPlayer = document.getElementById('videoPlayer');
+            
+            videoSource.src = videoUrl;
+            videoPlayer.load();
+            modal.classList.add('active');
+            
+            // Afficher le bouton quiz
+            document.getElementById('videoQuizBtn').style.display = 'block';
         }
 
-        // Gestion du Quiz
-        let currentQuiz = [];
-        let usedQuestions = [];
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.pause();
+            modal.classList.remove('active');
+        }
+
+        function switchToVideo() {
+            closeQuiz();
+            if (currentVideoUrl) {
+                openVideo(currentVideoUrl);
+            }
+        }
+
+        function switchToQuiz() {
+            closeVideo();
+            if (currentCourseId) {
+                openQuiz(currentCourseId);
+            }
+        }
 
         function openQuiz(courseId) {
-            try {
-                playClickSound();
-
-                const course = coursesData.find(c => c.id === courseId);
-                if (!course || !course.quiz || course.quiz.length === 0) {
-                    alert('Aucun quiz disponible pour ce cours');
-                    return;
-                }
-
-                currentQuiz = course.quiz;
-                usedQuestions = [];
-
-                document.getElementById('quizTitle').textContent = course.nom;
-                document.getElementById('quizSubtitle').textContent = `${course.quiz.length} questions disponibles`;
-
-                generatePostits();
-
-                document.getElementById('quizPanel').classList.add('active');
-                document.getElementById('quizOverlay').classList.add('active');
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors du chargement du quiz');
+            const course = coursesData.find(c => c.id === courseId);
+            if (!course || !course.quiz || course.quiz.length === 0) {
+                alert('Aucun quiz disponible pour ce cours');
+                return;
             }
+
+            currentCourseId = courseId;
+            currentVideoUrl = course.video;
+            currentQuiz = course.quiz;
+            currentPostitIndex = 0;
+
+            document.getElementById('quizTitle').textContent = course.nom;
+            document.getElementById('quizSubtitle').textContent = `${course.quiz.length} questions`;
+
+            renderPostits();
+            
+            // Afficher le bouton vidéo si le cours a une vidéo
+            if (currentVideoUrl) {
+                document.getElementById('quizVideoBtn').style.display = 'block';
+            }
+            
+            document.getElementById('quizModal').classList.add('active');
         }
 
-        function closeQuiz() {
-            document.getElementById('quizPanel').classList.remove('active');
-            document.getElementById('quizOverlay').classList.remove('active');
-        }
-
-        function generatePostits() {
-            const container = document.getElementById('postitsGrid');
-            const numPostits = Math.min(6, currentQuiz.length);
-
-            let html = '';
-            for (let i = 0; i < numPostits; i++) {
-                const question = getRandomQuestion();
-                html += `
-                    <div class="postit" id="postit-${i}" onclick="flipPostit(${i})">
-                        <div class="postit-inner">
-                            <div class="postit-front">
-                                <p>${question.question}</p>
-                            </div>
-                            <div class="postit-back">
-                                <p>${question.reponse}</p>
-                            </div>
+        function renderPostits() {
+            const carousel = document.getElementById('postitCarousel');
+            carousel.innerHTML = currentQuiz.map((q, index) => `
+                <div class="postit" id="postit-${index}" onclick="flipPostit(${index})" 
+                     style="transform: translateX(${(index - currentPostitIndex) * 220}px) scale(${index === currentPostitIndex ? 1 : 0.7}); opacity: ${index === currentPostitIndex ? 1 : 0.3}; z-index: ${10 - Math.abs(index - currentPostitIndex)};">
+                    <div class="postit-inner">
+                        <div class="postit-front">
+                            <p>${q.question}</p>
+                        </div>
+                        <div class="postit-back">
+                            <p>${q.reponse}</p>
                         </div>
                     </div>
-                `;
-            }
-
-            container.innerHTML = html;
-        }
-
-        function getRandomQuestion() {
-            let availableQuestions = currentQuiz.filter((q, index) => !usedQuestions.includes(index));
-
-            // Si toutes les questions ont été utilisées, on réinitialise
-            if (availableQuestions.length === 0) {
-                usedQuestions = [];
-                availableQuestions = currentQuiz;
-            }
-
-            const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-            const selectedQuestion = availableQuestions[randomIndex];
-
-            // Marquer la question comme utilisée
-            const originalIndex = currentQuiz.findIndex(q => q.question === selectedQuestion.question);
-            usedQuestions.push(originalIndex);
-
-            return selectedQuestion;
+                </div>
+            `).join('');
         }
 
         function flipPostit(index) {
-            playClickSound();
-
             const postit = document.getElementById(`postit-${index}`);
-            const isFlipped = postit.classList.contains('flipped');
+            postit.classList.toggle('flipped');
+        }
 
-            if (isFlipped) {
-                // Si déjà retourné, on le remet à l'endroit avec une nouvelle question
-                postit.classList.remove('flipped');
-
-                setTimeout(() => {
-                    const question = getRandomQuestion();
-                    const front = postit.querySelector('.postit-front p');
-                    const back = postit.querySelector('.postit-back p');
-                    front.textContent = question.question;
-                    back.textContent = question.reponse;
-                }, 300);
-            } else {
-                // Sinon on le retourne pour montrer la réponse
-                postit.classList.add('flipped');
+        function nextPostit() {
+            if (currentPostitIndex < currentQuiz.length - 1) {
+                currentPostitIndex++;
+                updatePostitCarousel();
             }
         }
+
+        function prevPostit() {
+            if (currentPostitIndex > 0) {
+                currentPostitIndex--;
+                updatePostitCarousel();
+            }
+        }
+
+        function updatePostitCarousel() {
+            const carousel = document.getElementById('postitCarousel');
+            const postits = carousel.querySelectorAll('.postit');
+
+            postits.forEach((postit, index) => {
+                const distance = index - currentPostitIndex;
+                postit.style.transform = `translateX(${distance * 220}px) scale(${distance === 0 ? 1 : 0.7})`;
+                postit.style.opacity = distance === 0 ? 1 : 0.3;
+                postit.style.zIndex = 10 - Math.abs(distance);
+
+                if (distance !== 0) {
+                    postit.classList.remove('flipped');
+                }
+            });
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').classList.remove('active');
+            document.querySelectorAll('.postit').forEach(p => p.classList.remove('flipped'));
+        }
+
+        // Fermer la modal vidéo en cliquant en dehors
+        document.addEventListener('click', (e) => {
+            const videoModal = document.getElementById('videoModal');
+            if (e.target === videoModal) {
+                closeVideo();
+            }
+        });
+
+        // Fermer la modal quiz en cliquant en dehors
+        document.addEventListener('click', (e) => {
+            const quizModal = document.getElementById('quizModal');
+            if (e.target === quizModal) {
+                closeQuiz();
+            }
+        });
     </script>
 </body>
 </html>

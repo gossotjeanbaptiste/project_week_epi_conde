@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
         // Récupérer l'utilisateur
         const connection = await pool.getConnection();
         const [users] = await connection.query(
-            'SELECT id, email, password, nom, prenom, solde, solde_max FROM users WHERE email = ?',
+            'SELECT id, email, password, nom, prenom, solde, solde_max, userAge FROM users WHERE email = ?',
             [email]
         );
         connection.release();
@@ -60,7 +60,8 @@ exports.login = async (req, res) => {
                 nom: user.nom,
                 prenom: user.prenom,
                 solde: user.solde,
-                solde_max: user.solde_max
+                solde_max: user.solde_max,
+                userAge: user.userAge
             }
         });
     } catch (error) {

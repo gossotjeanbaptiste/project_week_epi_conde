@@ -14,7 +14,7 @@
         }
 
         body {
-            background: white;
+            background: #d0e2f4;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -65,7 +65,7 @@
             right: 0;
             width: 100%;
             height: 40%;
-            background: #f3bc6b;
+            background: #DB7C3B;
             clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%);
             z-index: 0;
         }
@@ -94,19 +94,31 @@
 
         .wave-1 .wave-fill {
             animation: moveWave 8s linear infinite;
-            opacity: 0.8;
+            opacity: 1;
         }
 
         .wave-2 .wave-fill {
             animation: moveWave 10s linear infinite;
-            opacity: 0.5;
+            opacity: 1;
             animation-delay: -2s;
         }
 
         .wave-3 .wave-fill {
             animation: moveWave 12s linear infinite;
-            opacity: 0.3;
+            opacity: 1;
             animation-delay: -4s;
+        }
+
+        .wave-3 {
+            z-index: 0;
+        }
+
+        .wave-2 {
+            z-index: 1;
+        }
+
+        .wave-1 {
+            z-index: 2;
         }
 
         @keyframes moveWave {
@@ -121,7 +133,7 @@
         /* Decorative circles */
         .deco-circle {
             position: absolute;
-            background: #E0AC60;
+            background: #DB7C3B;
             border-radius: 50%;
             z-index: 0;
             animation: float linear infinite;
@@ -191,7 +203,7 @@
             font-family: 'Amatic SC', cursive;
             font-size: 128px;
             font-weight: 700;
-            color: #000;
+            color: rgba(0, 0, 0, 0.249);
             line-height: 1;
             margin: 0;
             letter-spacing: -2px;
@@ -199,7 +211,7 @@
 
         .balance-label {
             font-size: 14px;
-            color: #666;
+            color: #6666665a;
             margin-top: 8px;
             font-weight: 500;
         }
@@ -287,7 +299,7 @@
         /* Bottom nav circles */
         .bottom-circles {
             position: absolute;
-            bottom: 20px;
+            bottom: 5px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -349,17 +361,17 @@
             <!-- Decorative elements -->
             <div class="floating-wave wave-1">
                 <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                    <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#FFB6D9"/>
+                    <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#DB7C3B"/>
                 </svg>
             </div>
             <div class="floating-wave wave-2">
                 <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                    <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#FFB6D9"/>
+                    <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#E89761"/>
                 </svg>
             </div>
             <div class="floating-wave wave-3">
                 <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                    <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#FFB6D9"/>
+                    <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#F0B896"/>
                 </svg>
             </div>
             <div class="account-bg-shape" id="bg-shape"></div>
@@ -373,7 +385,7 @@
             <div class="balance-display">
                 <div class="balance-amount" id="balance-amount">Chargement...</div>
                 <div class="balance-label">Solde actuel</div>
-                <div class="balance-label" style="font-size: 12px; color: #999; margin-top: 8px;">Max atteint: <span id="balance-max">---</span></div>
+                <div class="balance-label" style="font-size: 12px; color: #99999987; margin-top: 8px;">Max atteint: <span id="balance-max">---</span></div>
             </div>
 
             <!-- User info -->
@@ -408,6 +420,48 @@
 
     <script src="script.js"></script>
     <script>
+        // Fonction pour mettre à jour les vagues en fonction du solde
+        function updateWaves(currentSolde, maxSolde) {
+            if (!maxSolde || maxSolde <= 0) return;
+            
+            // Calculer le ratio (0 à 1)
+            const ratio = Math.min(Math.max(currentSolde / maxSolde, 0), 1);
+            
+            // Hauteur: 50% à 150% (0.5x à 1.5x)
+            const baseHeight = 80;
+            const minHeight = baseHeight * 0.5;
+            const maxHeight = baseHeight * 1.5;
+            const waveHeight = minHeight + (ratio * (maxHeight - minHeight));
+            
+            // Vitesse: 14s à 6s (plus rapide quand solde est haut)
+            const minSpeed = 6;
+            const maxSpeed = 14;
+            const speed = maxSpeed - (ratio * (maxSpeed - minSpeed));
+            
+            // Appliquer les changements
+            const wave1 = document.querySelector('.wave-1');
+            const wave2 = document.querySelector('.wave-2');
+            const wave3 = document.querySelector('.wave-3');
+            
+            if (wave1) {
+                wave1.style.setProperty('height', waveHeight + 'px', 'important');
+                const fill1 = wave1.querySelector('.wave-fill');
+                if (fill1) fill1.style.animationDuration = speed + 's';
+            }
+            
+            if (wave2) {
+                wave2.style.setProperty('height', waveHeight + 'px', 'important');
+                const fill2 = wave2.querySelector('.wave-fill');
+                if (fill2) fill2.style.animationDuration = (speed + 2) + 's';
+            }
+            
+            if (wave3) {
+                wave3.style.setProperty('height', (waveHeight * 1.5) + 'px', 'important');
+                const fill3 = wave3.querySelector('.wave-fill');
+                if (fill3) fill3.style.animationDuration = (speed + 4) + 's';
+            }
+        }
+
         // Charger les infos utilisateur
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOMContentLoaded triggered');
@@ -468,6 +522,9 @@
                 document.getElementById('balance-max').textContent = soldeMaxDisplay;
             }
 
+            // Mettre à jour les vagues avec les données du localStorage
+            updateWaves(currentSolde, maxSolde);
+
             // Récupérer le profil complet depuis l'API pour les données à jour
             try {
                 const response = await fetch(`${API_URL}/auth/profile`, {
@@ -521,6 +578,13 @@
                     if (userData.email) {
                         document.getElementById('user-email').textContent = userData.email;
                     }
+
+                    // Mettre à jour les vagues avec les données de l'API
+                    let apiSolde = userData.solde;
+                    let apiMaxSolde = userData.solde_max;
+                    if (typeof apiSolde === 'string') apiSolde = parseFloat(apiSolde);
+                    if (typeof apiMaxSolde === 'string') apiMaxSolde = parseFloat(apiMaxSolde);
+                    updateWaves(apiSolde, apiMaxSolde);
                 } else {
                     console.error('Erreur API:', response.status, response.statusText);
                 }

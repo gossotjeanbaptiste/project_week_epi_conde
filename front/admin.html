@@ -257,6 +257,10 @@
                     <input type="text" id="newUserPrenom" placeholder="Jean">
                 </div>
                 <div class="form-group">
+                    <label>Âge:</label>
+                    <input type="number" id="newUserAge" placeholder="Âge" value="18" min="1" max="120">
+                </div>
+                <div class="form-group">
                     <label>Solde:</label>
                     <input type="number" id="newUserSolde" value="0" step="0.01">
                 </div>
@@ -271,6 +275,7 @@
                         <th>Email</th>
                         <th>Nom</th>
                         <th>Prénom</th>
+                        <th>Âge</th>
                         <th>Solde (€)</th>
                         <th>Solde Max (€)</th>
                         <th>Créé le</th>
@@ -278,7 +283,7 @@
                     </tr>
                 </thead>
                 <tbody id="usersTable">
-                    <tr><td colspan="8" style="text-align: center;">Chargement...</td></tr>
+                    <tr><td colspan="9" style="text-align: center;">Chargement...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -403,6 +408,7 @@
                             <td>${user.email}</td>
                             <td>${user.nom || '-'}</td>
                             <td>${user.prenom || '-'}</td>
+                            <td><input type="number" value="${user.userAge || 18}" min="1" max="120" id="age-${user.id}" style="width: 80px;"></td>
                             <td><input type="number" value="${user.solde || 0}" step="0.01" id="solde-${user.id}" style="width: 100px;"></td>
                             <td><input type="number" value="${user.solde_max || 0}" step="0.01" id="solde-max-${user.id}" style="width: 100px;" readonly disabled></td>
                             <td>${new Date(user.created_at).toLocaleDateString('fr-FR')}</td>
@@ -435,6 +441,7 @@
             const password = document.getElementById('newUserPassword').value;
             const nom = document.getElementById('newUserNom').value;
             const prenom = document.getElementById('newUserPrenom').value;
+            const age = parseInt(document.getElementById('newUserAge').value) || 18;
             const solde = parseFloat(document.getElementById('newUserSolde').value) || 0;
 
             if (!email || !password || !nom || !prenom) {
@@ -450,7 +457,7 @@
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email, password, nom, prenom, solde })
+                    body: JSON.stringify({ email, password, nom, prenom, age, solde })
                 });
 
                 if (!response.ok) throw new Error('Erreur lors de la création');
@@ -461,6 +468,7 @@
                 document.getElementById('newUserPassword').value = '';
                 document.getElementById('newUserNom').value = '';
                 document.getElementById('newUserPrenom').value = '';
+                document.getElementById('newUserAge').value = '18';
                 document.getElementById('newUserSolde').value = '0';
                 loadUsers();
             } catch (error) {
@@ -469,6 +477,7 @@
         }
 
         async function updateUserSolde(userId) {
+            const age = parseInt(document.getElementById(`age-${userId}`).value) || 18;
             const solde = document.getElementById(`solde-${userId}`).value;
 
             try {
@@ -480,13 +489,23 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ 
+                        age: age,
                         solde: parseFloat(solde)
                     })
                 });
 
                 if (!response.ok) throw new Error('Erreur lors de la mise à jour');
 
-                showMessage('Solde mis à jour avec succès', 'success');
+                showMessage('Âge et solde mis à jour avec succès', 'success');
+                
+                // Mettre à jour le localStorage si c'est l'utilisateur connecté
+                const currentUser = JSON.parse(localStorage.getItem(USER_KEY) || '{}');
+                if (currentUser.id === userId) {
+                    currentUser.userAge = age;
+                    currentUser.solde = parseFloat(solde);
+                    localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+                }
+                
                 loadUsers();
             } catch (error) {
                 showMessage('Erreur: ' + error.message, 'error');

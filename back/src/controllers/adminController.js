@@ -74,7 +74,7 @@ exports.createUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { email, nom, prenom, solde, solde_max } = req.body;
+        const { email, nom, prenom, solde, solde_max, age } = req.body;
 
         const connection = await pool.getConnection();
 
@@ -92,6 +92,10 @@ exports.updateUser = async (req, res) => {
         if (prenom) {
             updates.push('prenom = ?');
             values.push(prenom);
+        }
+        if (age !== undefined && age !== null) {
+            updates.push('userAge = ?');
+            values.push(parseInt(age));
         }
 
         // Gérer le solde et solde_max
@@ -130,7 +134,11 @@ exports.updateUser = async (req, res) => {
                 `UPDATE users SET ${updates.join(', ')} WHERE id = ?`,
                 values
             );
-            console.log(`✅ Utilisateur ${id} modifié - solde: ${solde}, solde_max: ${finalSoldeMax}`);
+            const logParts = [];
+            if (solde !== undefined) logParts.push(`solde: ${solde}`);
+            if (finalSoldeMax !== undefined) logParts.push(`solde_max: ${finalSoldeMax}`);
+            if (age !== undefined) logParts.push(`age: ${age}`);
+            console.log(`✅ Utilisateur ${id} modifié - ${logParts.join(', ')}`);
         }
 
         connection.release();
