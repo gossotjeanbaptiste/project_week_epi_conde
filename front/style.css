@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Amatic SC';
+    src: url('fonts/Amatic_SC/AmaticSC-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Amatic SC';
+    src: url('fonts/Amatic_SC/AmaticSC-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,32 +19,45 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+    font-family: 'Amatic SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #FFFFFF;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #333;
+    color: #000000;
 }
 
 .container {
     width: 100%;
     max-width: 600px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: #FFFFFF;
+    border-radius: 0;
+    box-shadow: none;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     padding-bottom: 150px;
+    position: relative;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    left: 0;
+    background: #E0AC60;
+    z-index: -1;
+    border-radius: 300px 300px 0 0 / 100px 100px 0 0;
 }
 
 /* Header */
 .header {
-    background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
-    color: white;
+    background: #FFFFFF;
+    color: #000000;
     padding: 40px 20px;
     text-align: center;
     position: relative;
@@ -40,8 +67,8 @@ body {
     position: absolute;
     top: 15px;
     right: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    background: #E0AC60;
+    border: 2px solid #E0AC60;
     border-radius: 50%;
     width: 45px;
     height: 45px;
@@ -50,21 +77,21 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #000000;
     padding: 0;
 }
 
 .logout-btn-icon svg {
     width: 24px;
     height: 24px;
-    stroke: white;
+    stroke: #000000;
 }
 
 .logout-btn-icon:hover {
-    background: rgba(255, 50, 50, 0.3);
-    border-color: rgba(255, 100, 100, 0.6);
+    background: #d4985a;
+    border-color: #d4985a;
     transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(255, 50, 50, 0.3);
+    box-shadow: 0 4px 15px rgba(224, 172, 96, 0.3);
 }
 
 .logout-btn-icon:active {
@@ -76,18 +103,21 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     letter-spacing: 2px;
+    color: #000000;
 }
 
 .tagline {
     font-size: 14px;
-    opacity: 0.9;
+    opacity: 1;
     font-weight: 300;
+    color: #000000;
 }
 
 .user-name {
     font-size: 12px;
     margin-top: 10px;
-    opacity: 0.8;
+    opacity: 1;
+    color: #000000;
 }
 
 /* Main Content */
@@ -106,14 +136,18 @@ body {
 }
 
 .welcome-section h2 {
-    font-size: 28px;
-    color: #0a2463;
+    font-size: 48px;
+    color: #000000;
     margin-bottom: 10px;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
 }
 
 .welcome-section p {
-    font-size: 16px;
-    color: #666;
+    font-size: 20px;
+    color: #000000;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
 }
 
 /* Buttons Container */
@@ -132,12 +166,15 @@ body {
     gap: 15px;
     padding: 20px;
     border: none;
-    border-radius: 12px;
+    border-radius: 20px;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: #FFFFFF;
+    color: #000000;
+    border: 3px solid #E0AC60;
 }
 
 .nav-button:hover {
@@ -160,30 +197,36 @@ body {
 
 /* Button Styles */
 .courses-btn {
-    background: linear-gradient(135deg, #1e90ff 0%, #1473e6 100%);
-    color: white;
+    background: #FFFFFF;
+    color: #000000;
+    border: 3px solid #E0AC60;
 }
 
 .courses-btn:hover {
-    background: linear-gradient(135deg, #1473e6 0%, #0d66cc 100%);
+    background: #E0AC60;
+    color: #000000;
 }
 
 .account-btn {
-    background: linear-gradient(135deg, #00c896 0%, #00a876 100%);
-    color: white;
+    background: #FFFFFF;
+    color: #000000;
+    border: 3px solid #E0AC60;
 }
 
 .account-btn:hover {
-    background: linear-gradient(135deg, #00a876 0%, #008560 100%);
+    background: #E0AC60;
+    color: #000000;
 }
 
 .advisor-btn {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
-    color: white;
+    background: #FFFFFF;
+    color: #000000;
+    border: 3px solid #E0AC60;
 }
 
 .advisor-btn:hover {
-    background: linear-gradient(135deg, #ee5a5a 0%, #dd4444 100%);
+    background: #E0AC60;
+    color: #000000;
 }
 
 /* Navigation Buttons at Bottom */
@@ -196,8 +239,8 @@ body {
     flex-direction: column;
     gap: 12px;
     padding: 15px;
-    background: white;
-    border-top: 2px solid #f0f0f0;
+    background: #FFFFFF;
+    border-top: 2px solid #E0AC60;
     box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
     z-index: 100;
     max-width: 600px;
@@ -215,14 +258,14 @@ body {
     flex: 1;
     min-width: 90px;
     padding: 10px 12px;
-    border: 2px solid #e0e0e0;
-    background: white;
+    border: 2px solid #E0AC60;
+    background: #FFFFFF;
     border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
     font-size: 12px;
     transition: all 0.3s ease;
-    color: #0a2463;
+    color: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -231,11 +274,11 @@ body {
 }
 
 .bottom-nav-btn:hover {
-    border-color: #247ba0;
-    background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
-    color: white;
+    border-color: #E0AC60;
+    background: #E0AC60;
+    color: #000000;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(36, 123, 160, 0.2);
+    box-shadow: 0 4px 12px rgba(224, 172, 96, 0.2);
 }
 
 .bottom-nav-btn:active {
@@ -244,12 +287,12 @@ body {
 
 /* Footer */
 .footer {
-    background: #f5f5f5;
+    background: #E0AC60;
     padding: 20px;
     text-align: center;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #E0AC60;
     font-size: 12px;
-    color: #999;
+    color: #000000;
     margin-top: auto;
 }
 
@@ -263,15 +306,19 @@ body {
 }
 
 .login-section h2 {
-    font-size: 28px;
-    color: #0a2463;
+    font-size: 48px;
+    color: #000000;
     margin-bottom: 10px;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
 }
 
 .login-section p {
-    font-size: 16px;
-    color: #666;
+    font-size: 18px;
+    color: #000000;
     margin-bottom: 30px;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
 }
 
 .login-form {
@@ -291,29 +338,30 @@ body {
 .form-group label {
     font-size: 14px;
     font-weight: 600;
-    color: #0a2463;
+    color: #000000;
 }
 
 .form-group input {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #E0AC60;
     border-radius: 8px;
     font-size: 14px;
     transition: all 0.3s ease;
     font-family: inherit;
+    color: #000000;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: #247ba0;
-    box-shadow: 0 0 10px rgba(36, 123, 160, 0.1);
+    border-color: #E0AC60;
+    box-shadow: 0 0 10px rgba(224, 172, 96, 0.3);
 }
 
 .login-btn {
     padding: 15px;
-    background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
-    color: white;
+    background: #E0AC60;
+    color: #000000;
     border: none;
     border-radius: 8px;
     font-size: 16px;
@@ -325,7 +373,8 @@ body {
 
 .login-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px rgba(224, 172, 96, 0.3);
+    background: #d4985a;
 }
 
 .login-btn:active {
@@ -349,13 +398,13 @@ body {
 }
 
 .login-options a {
-    color: #247ba0;
+    color: #E0AC60;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .login-options a:hover {
-    color: #0a2463;
+    color: #000000;
     text-decoration: underline;
 }
 
@@ -371,7 +420,7 @@ body {
     }
 
     .welcome-section h2 {
-        font-size: 24px;
+        font-size: 36px;
     }
 
     .nav-button {
