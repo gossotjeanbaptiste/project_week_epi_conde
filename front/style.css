@@ -296,6 +296,16 @@ body {
     margin-top: auto;
 }
 
+.footer p {
+    margin: 5px 0;
+}
+
+.footer-credit {
+    font-size: 10px;
+    opacity: 0.8;
+    font-style: italic;
+}
+
 /* Login Page Styles */
 .login-container {
     max-width: 400px;
