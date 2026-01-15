@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
         // Récupérer l'utilisateur
         const connection = await pool.getConnection();
         const [users] = await connection.query(
-            'SELECT id, email, password, nom, prenom, solde, solde_max, userAge FROM users WHERE email = ?',
+            'SELECT id, email, password, nom, prenom, solde FROM users WHERE email = ?',
             [email]
         );
         connection.release();

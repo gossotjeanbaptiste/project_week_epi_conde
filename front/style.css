@@ -112,6 +112,13 @@ body {
     color: #000000;
 }
 
+.logo-img {
+    width: 140px;
+    height: auto;
+    margin: -10px auto 10px;
+    display: block;
+}
+
 .tagline {
     font-size: 14px;
     opacity: 1;
