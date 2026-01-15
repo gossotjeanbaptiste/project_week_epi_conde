@@ -358,6 +358,30 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
         }
 
+        /* Logout button */
+        .logout-btn {
+            margin-top: 5px;
+            padding: 12px 30px;
+            background: #DB7C3B;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-btn:hover {
+            background: #E89761;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .balance-amount {
@@ -438,6 +462,11 @@
                     <span class="info-value" id="user-email">jean@example.com</span>
                 </div>
             </div>
+
+            <!-- Logout button -->
+            <button class="logout-btn" onclick="handleLogout()">
+                Se déconnecter
+            </button>
 
             <!-- Bottom navigation circles -->
             <div class="bottom-circles">

@@ -63,7 +63,7 @@ async function handleLogin(event) {
             
             // Redirection après un délai pour entendre le son
             setTimeout(() => {
-                window.location.href = 'home.html';
+                window.location.href = 'account.html';
             }, 100);
         } else {
             errorDiv.textContent = data.message || 'Erreur de connexion';
