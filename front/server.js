@@ -20,8 +20,8 @@ const server = http.createServer((req, res) => {
     // Logger
     console.log(`📨 ${req.method} ${req.url}`);
 
-    // Redirection automatique vers landing.html
-    let filePath = req.url === '/' ? '/landing.html' : req.url;
+    // Redirection automatique vers index.html
+    let filePath = req.url === '/' ? '/index.html' : req.url;
     filePath = path.join(frontDir, filePath);
 
     // Éviter les remontées de répertoire

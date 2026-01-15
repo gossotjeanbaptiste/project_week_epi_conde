@@ -23,6 +23,10 @@ async function initDatabase() {
         // Se connecter à la base de données
         await connection.query(`USE ${process.env.DB_DATABASE}`);
 
+        // Supprimer la table si elle existe
+        await connection.query(`DROP TABLE IF EXISTS users`);
+        console.log('✅ Table "users" supprimée');
+
         // Créer la table users
         await connection.query(`
             CREATE TABLE IF NOT EXISTS users (
@@ -31,7 +35,9 @@ async function initDatabase() {
                 password VARCHAR(255) NOT NULL,
                 nom VARCHAR(100) NOT NULL,
                 prenom VARCHAR(100) NOT NULL,
+                userAge INT DEFAULT 0,
                 solde DECIMAL(15, 2) DEFAULT 0.00,
+                solde_max DECIMAL(15, 2) DEFAULT 0.00,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )
@@ -51,7 +57,7 @@ async function initDatabase() {
                 'INSERT INTO users (email, password, nom, prenom, solde) VALUES (?, ?, ?, ?, ?)',
                 ['test@thuun.com', hashedPassword, 'Dupont', 'Jean', 5000.00]
             );
-            console.log('✅ Utilisateur test créé (test@thuun.com / test123)');
+            console.log('✅ Utilisateur test créé (test@tuun.com / test123)');
         } else {
             console.log('ℹ️  Utilisateur test existe déjà');
         }
