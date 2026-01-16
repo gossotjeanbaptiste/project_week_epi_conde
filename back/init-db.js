@@ -47,7 +47,7 @@ async function initDatabase() {
         // Vérifier si l'utilisateur test existe
         const [users] = await connection.query(
             'SELECT id FROM users WHERE email = ?',
-            ['test@thuun.com']
+            ['test@tuun.com']
         );
 
         if (users.length === 0) {
@@ -55,7 +55,7 @@ async function initDatabase() {
             const hashedPassword = await bcrypt.hash('test123', 10);
             await connection.query(
                 'INSERT INTO users (email, password, nom, prenom, solde) VALUES (?, ?, ?, ?, ?)',
-                ['test@thuun.com', hashedPassword, 'Dupont', 'Jean', 5000.00]
+                ['test@tuun.com', hashedPassword, 'Dupont', 'Jean', 5000.00]
             );
             console.log('✅ Utilisateur test créé (test@tuun.com / test123)');
         } else {
