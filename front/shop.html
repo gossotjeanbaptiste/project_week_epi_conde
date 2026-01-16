@@ -60,8 +60,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
+            justify-content: flex-start;
+            padding: 30px 20px 20px 20px;
             position: relative;
             overflow: hidden;
         }
@@ -172,29 +172,41 @@
             }
         }
 
+        /* Content cards grid */
+        .content-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            max-width: 350px;
+            width: 100%;
+            z-index: 2;
+        }
+
         /* Content card */
         .content-card {
             background: white;
             border-radius: 16px;
-            padding: 30px 20px;
+            padding: 15px 5px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
             z-index: 2;
             animation: fadeIn 0.8s ease;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
         .content-card h2 {
             color: #0a2463;
-            margin-bottom: 15px;
-            font-size: 20px;
+            margin: 0;
+            font-size: 18px;
         }
 
         .content-card p {
             color: #666;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 0;
         }
 
         @keyframes fadeIn {
@@ -317,10 +329,31 @@
 
         <!-- Main content -->
         <div class="shop-main">
-            <div class="content-card">
-                <h2>🛍️ Offres à la demande</h2>
-                <p>Découvrez nos offres exclusives et accélérèz votre apprentissage avec des formations premium.</p>
-                <p style="margin-bottom: 0; font-size: 12px; color: #999;">Parcourez nos packs et offres spéciales</p>
+            <div class="content-cards-grid">
+                <div class="content-card">
+                    <h2>🏠</h2>
+                    <p style="font-weight: bold; color: #0a2463;">Essentielle</p>
+                    <p>Gratuit</p>
+                    <p style="font-size: 11px;">Pas de conseiller<br>Virement illimité<br>Pas de découvert</p>
+                </div>
+                <div class="content-card">
+                    <h2>📞</h2>
+                    <p style="font-weight: bold; color: #0a2463;">Standard</p>
+                    <p>12€/mois</p>
+                    <p style="font-size: 11px;">Conseiller 9h-17h<br>Virement illimité<br>Pas de découvert</p>
+                </div>
+                <div class="content-card">
+                    <h2>⭐</h2>
+                    <p style="font-weight: bold; color: #0a2463;">Premium</p>
+                    <p>24€/mois</p>
+                    <p style="font-size: 11px;">Conseiller 24/24<br>Virement illimité<br>Pas de découvert</p>
+                </div>
+                <div class="content-card">
+                    <h2>👑</h2>
+                    <p style="font-weight: bold; color: #0a2463;">Infinite</p>
+                    <p>35€/mois</p>
+                    <p style="font-size: 11px;">Conseiller 24/24<br>Virement illimité<br>Découvert autorisé</p>
+                </div>
             </div>
         </div>
 
